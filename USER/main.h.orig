@@ -1,0 +1,121 @@
+#ifndef __MAIN_H_
+#define __MIAN_H_
+
+#define INFANTRY_3 
+
+#include "sp_type.h"
+#include "RefereeInfo.h"
+#include "sp_math.h"
+#include "sp_pid.h"
+#include "sp_filter.h"
+//#include "frame.h"
+
+#include "bsp.h"
+#include "delay.h"
+#include "buzzer.h"
+#include "led.h"
+#include "spi.h"
+#include "adi_gyro.h"
+#include "can.h"
+#include "euler.h"
+#include "rc.h"
+#include "timer.h"
+#include "usb.h"
+#include "usart2.h"
+#include "usart3.h"
+#include "usart6.h"
+//#include "jy901_usart.h"
+#include "laser.h"
+#include "mpu6500.h"
+
+
+
+
+#include "pid.h"
+
+
+
+#include "MonitorControl.h"
+#include "RemoteControl.h"
+#include "ControlTask.h"
+#include "cap_control.h"
+#include "CMControl.h"
+#include "ShootControl.h"
+#include "GimbalControl.h"
+#include "Auto_aim.h"
+
+
+
+
+#define Referee_System //接入裁判系统时开启
+
+#define _chassis_move
+#define Gimbal_Move
+
+//#define AutoAim_USB
+//#define USING_USB
+
+
+
+
+
+//#define MY_ROBOT_ID robotid_blue_infantry_1
+//#define MY_CLIENT_ID clientid_blue_infantry_1//蓝方1号步兵
+
+
+#define MY_ROBOT_ID robotid_red_infantry_1
+#define MY_CLIENT_ID clientid_red_infantry_1//红方1号步兵
+
+#define gongkong
+
+
+
+
+#define GYRO_X_OFFSET 0//0.0390f  
+#define GYRO_Y_OFFSET 0//0.05412f
+#define GYRO_Z_OFFSET 0//-0.037880f
+
+
+
+
+
+#define YawMax 1200 			
+#define YawMin -1200					
+#define PitMax 180	
+#define PitMin -500
+
+
+
+#define MIDDLE_YAW 	3432
+#define MIDDLE_PITCH  2241//7915
+
+#define MOUSE_YAW_SPEED 0.0024  
+#define MOUSE_PIT_SPEED 0.1
+
+
+#define PIDVAL_CM_SPEED_p 2.5
+#define PIDVAL_CM_SPEED_i 5.8
+#define PIDVAL_CM_SPEED_d 0.0
+#define PIDVAL_CM_SPEED_limit 200
+
+#define PIDVAL_CM_FOLLOW_p 0.8
+#define PIDVAL_CM_FOLLOW_i 0.2
+#define PIDVAL_CM_FOLLOW_d 0.012
+#define PIDVAL_CM_FOLLOW_limit 200
+
+#define XLIMIT_OFFSET 400
+#define YLIMIT_OFFSET 500
+#define gears_speedXYZ 	18   
+#define gears_speedRAD 	15  
+#define followVal_limit 5  
+
+
+
+
+
+
+#endif
+
+
+
+
