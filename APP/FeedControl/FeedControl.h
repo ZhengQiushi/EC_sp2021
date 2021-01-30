@@ -2,7 +2,7 @@
 #define _FEEDCONTROL_H
 
 #include "main.h"
-
+extern int PIDOut_Feed;
 void FeedJudge();
 void PidFeedInit(void);
 void FeedControlLoop(void);

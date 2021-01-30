@@ -102,9 +102,8 @@ void TIM2_IRQHandler(void)      //2ms产生一次中断
 	if(TIM_GetITStatus(TIM2,TIM_IT_Update)==SET) //溢出中断
 	{
 
+		
 			update_euler_mpu();
-			
-			
 			
 	}
 	TIM_ClearITPendingBit(TIM2,TIM_IT_Update);  //清除中断标志位

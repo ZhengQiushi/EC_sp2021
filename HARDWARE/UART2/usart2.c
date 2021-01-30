@@ -130,7 +130,6 @@ u8 Auto_Frame_Large_Unpack()
 //	Auto_Frame_Large.yaw = -Auto_Frame_Large_Raw.yaw;
 //	Auto_Frame_Large.pitch_current = Gimbal_Standard(CAN1_206.Current_Position, Middle_Pitch_Large)/8192.0*360;
 //	Auto_Frame_Large.yaw_current = Gimbal_Standard_Gyro(Gyro_Result.Yaw*180/3.14 - Large_Offset_Gyro.Yaw*180/3.14);
-	fram.pitch=-fram.pitch;
 	Auto_Frame_Large_Raw.head = 0;
 	Auto_Frame_Large_Raw.crc8check = 0;
 	return 1;

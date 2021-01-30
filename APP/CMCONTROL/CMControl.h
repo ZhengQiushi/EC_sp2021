@@ -29,5 +29,5 @@ extern float lec_numB;
 extern float lec_numC;
 extern float lec_numD;
 extern int16_t speedA_final,speedB_final,speedC_final,speedD_final;
-extern float lookfollow;
+
 #endif

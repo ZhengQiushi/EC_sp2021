@@ -35,6 +35,13 @@ float Pitch_Normal_sp=2.5;
 float Pitch_Normal_si=0;//0.0;
 float Pitch_Normal_sd=0.5;//0.0;
 
+float Pitch_Normal_down_pp=140;//150																											
+float Pitch_Normal_down_pi=65;//60
+float Pitch_Normal_down_pd=4.25;//4.65;//4.5//200 54 4.4 for small angle
+float Pitch_Normal_down_sp=2.5;
+float Pitch_Normal_down_si=0.2;//0.0;
+float Pitch_Normal_down_sd=0;//0.0;
+
 
 float Yaw_SmallANG_pp=63.0;
 float Yaw_SmallANG_pi=2.0;
@@ -326,7 +333,8 @@ void GimbalControlLoop(void)
 				}
     }
 
-    CAN2_Cmd_All((int16_t)PIDOut_Whole_Yaw, (int16_t)PIDOut_Whole_Pit);
+ //  CAN2_Cmd_All((int16_t)0, (int16_t)PIDOut_Whole_Pit);
+		    CAN2_Cmd_All((int16_t)-PIDOut_Whole_Yaw, (int16_t)PIDOut_Whole_Pit,(int16_t)PIDOut_Feed);
     //CAN1_Cmd_All((int16_t)0, (int16_t)0);
 }
 
@@ -353,7 +361,7 @@ void TargetCacul(void)
 					target_offset(2);
 				}
 					
-        pit_temp=PitchTarget.Mechanical-0.02f	*	(RC_Ex_Ctl.rc.ch3);//0.03
+        pit_temp=PitchTarget.Mechanical-0.03f	*	(RC_Ex_Ctl.rc.ch3);//0.03
         if(pit_temp>(MIDDLE_PITCH + PitMax)) {
             PitchTarget.Mechanical = MIDDLE_PITCH + PitMax;
         }
@@ -507,13 +515,23 @@ float YawPID_MechanicalAngle(float SetPosition)
 float PitchPID_MechanicalAngle(float SetPosition)
 {
     float NowPosition=continuous_current_position_filtered_206;
-    float NowSpeed=0;//current_cm_206;
+    float NowSpeed=current_cm_206;//current_cm_206;
 
-   if (adi_die_flag==0)
+/*   if (adi_die_flag==0)
        NowSpeed=-adis16470_real_data.gyro_y*57.3f;
    else
        NowSpeed=-mpu6500_real_data.Gyro_Y * 57.3f;
+*/
 
+	 if(SetPosition>NowPosition)//down
+		{		PID_SetGains(&PitchPID.Position,Pitch_Normal_down_pp,Pitch_Normal_down_pi,Pitch_Normal_down_pd);
+				PID_SetGains(&PitchPID.Speed,Pitch_Normal_down_sp,Pitch_Normal_down_si,Pitch_Normal_down_sd);
+		}
+		else
+		{		PID_SetGains(&PitchPID.Position,Pitch_Normal_pp,Pitch_Normal_pi,Pitch_Normal_pd);
+				PID_SetGains(&PitchPID.Speed,Pitch_Normal_sp,Pitch_Normal_si,Pitch_Normal_sd);
+		}	
+	
 
     PIDOut_Position_Pit=PID_ControllerDriver(&PitchPID.Position,SetPosition,NowPosition);
     PIDOut_Speed_Pit=PID_ControllerDriver(&PitchPID.Speed,PIDOut_Position_Pit/20.0f,NowSpeed);
@@ -596,6 +614,7 @@ float YawPID_Gyro(float SetPosition)
     float NowPosition=Yaw*57.3f;
     angle_in_degree=NowPosition;
     float NowSpeed=delay_speed;
+
     SetPosition = SetPosition*22.756f;//8192/360.0f;
     NowPosition = NowPosition*22.756f;//8192/360.0f;
     if(fabs(SetPosition-NowPosition)<50)

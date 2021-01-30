@@ -81,8 +81,8 @@ void FrictionControlLoop(void)
     else if(frictionState == Friction_ON)
       {
 				if (speed_level==0)Friction_speed_target_l=0;
-        else if(speed_level==1)Friction_speed_target_l=6300;
-        else if(speed_level==2)Friction_speed_target_l=6300;
+        else if(speed_level==1)Friction_speed_target_l=-7500;
+        else if(speed_level==2)Friction_speed_target_l=-7500;
       }
 	}	
   else if ((remoteState == PREPARE_STATE)||(remoteState == STANDBY_STATE) ||(remoteState == ERROR_STATE))

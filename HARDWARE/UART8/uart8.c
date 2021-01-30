@@ -1,9 +1,14 @@
+/*
+* @Author: Yaadon
+* @Date:   2020-10-21 13:17:43
+* @Last Modified by:   Yaadon
+* @Last Modified time: 2020-10-31 20:47:03
+*/
 #include "main.h"
-
-u8 u8_sendbuffer[16];
+#define uart8datasize 6
+u8 u8_sendbuffer[uart8datasize];
 void UART8_Init()
 {
-	
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART8, ENABLE);
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1,ENABLE);		
@@ -35,7 +40,7 @@ void UART8_Init()
 	USART_Cmd(UART8,ENABLE);
 	USART_ClearFlag(UART8, USART_FLAG_TC);
 	
-	USART_DMACmd(UART8,USART_DMAReq_Tx,DISABLE);
+	USART_DMACmd(UART8,USART_DMAReq_Tx,ENABLE);
 
 //	{
 //	NVIC_InitTypeDef nvic;
@@ -52,7 +57,7 @@ void UART8_Init()
 	dma.DMA_PeripheralBaseAddr = (uint32_t)&(UART8->DR);
 	dma.DMA_Memory0BaseAddr = (uint32_t)u8_sendbuffer;   
 	dma.DMA_DIR = DMA_DIR_MemoryToPeripheral;
-	dma.DMA_BufferSize = 16;       
+	dma.DMA_BufferSize = uart8datasize;       
 	dma.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	dma.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	dma.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
@@ -74,7 +79,7 @@ void UART8_Init()
 	DMA_ITConfig(DMA1_Stream0,DMA_IT_TC,ENABLE);  
 	}
 	
-	DMA_Cmd(DMA1_Stream0,ENABLE);							
+	DMA_Cmd(DMA1_Stream0,DISABLE);							
 	//DMA_Cmd(DMA1_Stream1,ENABLE);
 
 
@@ -85,19 +90,19 @@ void DMA1_Stream0_IRQHandler(void)
 
 	 if(DMA_GetITStatus(DMA1_Stream0,DMA_IT_TCIF0)!=RESET)//??DMA2_Steam7????  
     {   
-			USART_DMACmd(UART8,USART_DMAReq_Tx,DISABLE);
+			//USART_DMACmd(UART8,USART_DMAReq_Tx,DISABLE);
 			DMA_Cmd(DMA1_Stream0,DISABLE);	
-      DMA_ClearITPendingBit(DMA1_Stream0,DMA_FLAG_TCIF0);//??DMA2_Steam7??????  
-			DMA_Cmd(DMA1_Stream0,ENABLE);	
+      DMA_ClearITPendingBit(DMA1_Stream0,DMA_IT_TCIF0);//??DMA2_Steam7??????  
+			//DMA_Cmd(DMA1_Stream0,ENABLE);	
     }  
 }
 
 //void Usart_SendByte( USART_TypeDef * pUSARTx, uint8_t ch)
 //{
-//	/* 发送一个字节数据到USART */
+//	/* 路垄脣脥脪禄赂枚脳脰陆脷脢媒戮脻碌陆USART */
 //	USART_SendData(pUSARTx,ch);
 //		
-//	/* 等待发送数据寄存器为空 */
+//	/* 碌脠麓媒路垄脣脥脢媒戮脻录脛麓忙脝梅脦陋驴脮 */
 //	while (USART_GetFlagStatus(pUSARTx, USART_FLAG_TXE) == RESET);	
 //}
 
@@ -106,7 +111,7 @@ void DMA1_Stream0_IRQHandler(void)
 //	u8 i=0;
 //	while (i < 2) 
 //	{
-//		while((USART6->SR&0X40)==0);//循环发送,直到发送完毕   
+//		while((USART6->SR&0X40)==0);//脩颅禄路路垄脣脥,脰卤碌陆路垄脣脥脥锚卤脧   
 //		USART6->DR = (u8) buffer[i++];      
 //	} 
 //}
@@ -116,11 +121,11 @@ void UART_DMA_SEND(int data){
 	//u8 buffer[16];
 	int i=0;
 	int len;
-	for(i=0;i<16;i++){
+	for(i=0;i<uart8datasize;i++){
 		u8_sendbuffer[i]=0x00;
 	}
 	i=0;
-	if(data>0){
+	if(data>=0){
 		while(data/10!=0){
 		temp=data-data/10*10;
 		u8_sendbuffer[i]=temp+'0';
@@ -151,5 +156,6 @@ void UART_DMA_SEND(int data){
 			u8_sendbuffer[len-1-i]=temp_char;
 		}
 	u8_sendbuffer[len]='\r';
-	USART_DMACmd(UART8,USART_DMAReq_Tx,ENABLE);
+	//USART_DMACmd(UART8,USART_DMAReq_Tx,ENABLE);
+	DMA_Cmd(DMA1_Stream0,ENABLE);	
 }

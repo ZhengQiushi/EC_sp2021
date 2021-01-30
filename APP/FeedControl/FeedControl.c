@@ -201,17 +201,17 @@ void Shoot_Para_Moni(void)
 void Shoot_target_Cal(void)
 {
   if(Feed_Mode==-1)
-	{Feed_speed_target=-3000; PIDOut_Feed=PID_ControllerDriver(&Feed_Speed_PID,Feed_speed_target,current_speed_207);}
+	{Feed_speed_target=1200; PIDOut_Feed=PID_ControllerDriver(&Feed_Speed_PID,Feed_speed_target,current_speed_207);}
 	else if(Feed_Mode==0)
 	{Feed_speed_target=0;PIDOut_Feed=PID_ControllerDriver(&Feed_Speed_PID,Feed_speed_target,current_speed_207);}
 	else if(Feed_Mode==1)
-	{Feed_speed_target=-3300;PIDOut_Feed=PID_ControllerDriver(&Feed_Speed_PID,Feed_speed_target,current_speed_207);StuckMoni_Speed();}
+	{Feed_speed_target=1200;PIDOut_Feed=PID_ControllerDriver(&Feed_Speed_PID,Feed_speed_target,current_speed_207);StuckMoni_Speed();} //3000,3300
 	else if(Feed_Mode==2)
-	{if(RC_Ctl.mouse.press_l){Feed_position_target=-1*(continuous_current_position_207+Triple_Tap*30);}ShootMove(Feed_position_target);StuckMoni();}
+	{if(RC_Ctl.mouse.press_l){Feed_position_target=1*(continuous_current_position_207+Triple_Tap*30);}ShootMove(Feed_position_target);StuckMoni();}
 	else if(Feed_Mode==3)
-	{if(RC_Ctl.mouse.press_l){Feed_position_target=-1*(continuous_current_position_207+Signal_Shoot*40);}ShootMove(Feed_position_target);StuckMoni();}
+	{if(RC_Ctl.mouse.press_l){Feed_position_target=1*(continuous_current_position_207+Signal_Shoot*40);}ShootMove(Feed_position_target);StuckMoni();}
 	else if(Feed_Mode==4)
-	{if(RC_Ctl.mouse.press_l){Feed_position_target=-1*(continuous_current_position_207+remain_bullet*40);}ShootMove(Feed_position_target);StuckMoni();}
+	{if(RC_Ctl.mouse.press_l){Feed_position_target=1*(continuous_current_position_207+remain_bullet*40);}ShootMove(Feed_position_target);StuckMoni();}
 }
 
 
@@ -232,7 +232,8 @@ void FeedControlLoop(void)
 	Shoot_Para_Moni();
 	FeedJudge();
 	Shoot_target_Cal();
-	CAN1_Feed_Cmd(PIDOut_Feed);
+	 CAN2_Cmd_All((int16_t)-PIDOut_Whole_Yaw, (int16_t)PIDOut_Whole_Pit,(int16_t)PIDOut_Feed);
+	//CAN1_Feed_Cmd(PIDOut_Feed);
 }
 
 

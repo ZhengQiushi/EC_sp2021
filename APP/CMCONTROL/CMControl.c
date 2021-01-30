@@ -14,7 +14,7 @@ int16_t CMFollowVal=0; 			    //底盘跟随值
 int16_t speedA_final,speedB_final,speedC_final,speedD_final;
 //PID_Struct CMPid,CMFollowPid,CMFollowPid_speed;                 //底盘运动pid、跟随pid
 float step=100,keymove_x=0,keymove_y=0,m=0,n=0,q=0;           //step-速度变化率  x-x轴方向变化值 y-y速度变化值;
-float lookfollow;
+float followwatch;
 
 
 
@@ -464,10 +464,10 @@ int16_t followValCal(float Setposition)
 //	float followVal_speed=PID_ControllerDriver(&SPFOLLOW_SPEED,followVal/20.0,yaw_speed);
 //	followVal = CMSpeedLegalize(followVal_speed,1200);
     //跟随量最小值，角度过小不跟随
-    if(abs(followVal) < followVal_limit) followVal = 0;
-lookfollow=followVal;
+	followwatch=followVal;
+    if(abs(followVal) < followVal_limit) 
+			followVal = 0;
     return followVal;
-	 //   return 0;
 }
 
 

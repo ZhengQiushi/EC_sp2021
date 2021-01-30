@@ -337,7 +337,6 @@ memcpy((uint8_t*)&ext_power_heat_data.chassis_power_buffer,(ext_power_heat_data_
 	memcpy((uint8_t*)&ext_power_heat_data.shooter_heat0,ext_power_heat_data_Message+10,2);
 	memcpy((uint8_t*)&ext_power_heat_data.shooter_heat1,ext_power_heat_data_Message+12,2);
 	
-//	UART_DMA_SEND(ext_power_heat_data.chassis_power);
 }
 
 

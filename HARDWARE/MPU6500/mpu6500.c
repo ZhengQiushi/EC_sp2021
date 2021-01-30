@@ -2,7 +2,7 @@
 #include "spi.h"
 #include "main.h"
 #define ACCEL_SEN 16384.0f
-#define GYRO_SEN 1880.0f// 938.8032f
+#define GYRO_SEN 1880.0f
 #define MAG_SEN 0.3f
 #define	WHO_AM_I			0x75	//只读  默认读出应该是 MPU6050_ID = 0x68
 MPU6500_RAW_DATA mpu6500_raw_data;
@@ -140,33 +140,6 @@ void MPU6500_Read(void){
 
 	mpu6500_raw_data.Temp=(short)((buf[6])<<8 )| buf[7];
 	mpu6500_real_data.Temp=mpu6500_raw_data.Temp*1.0;	
-/*
-	unsigned char buf[14];
-	MPU6500ReadSPI(ACCEL_XOUT_H,buf,14);
-	
-	mpu6500_raw_data.Accel_X=(short)((buf[0])<<8) | buf[1];
-	mpu6500_real_data.Accel_X=-mpu6500_raw_data.Accel_X/ACCEL_SEN;
-	
-	mpu6500_raw_data.Accel_Y=(short)((buf[2])<<8 )| buf[3];
-	mpu6500_real_data.Accel_Y=mpu6500_raw_data.Accel_Y/ACCEL_SEN;
-	
-	mpu6500_raw_data.Accel_Z=(short)((buf[4])<<8 )| buf[5];
-	mpu6500_real_data.Accel_Z=mpu6500_raw_data.Accel_Z/ACCEL_SEN;
-	
-	mpu6500_raw_data.Temp=(short)((buf[6])<<8 )| buf[7];
-	mpu6500_real_data.Temp=mpu6500_raw_data.Temp*1.0;
-	
-	mpu6500_raw_data.Gyro_X=(short)((buf[8])<<8 )| buf[9];//01
-	mpu6500_real_data.Gyro_X=-mpu6500_raw_data.Gyro_X/1880.0f-offset_x;
-	
-	
-	mpu6500_raw_data.Gyro_Y=(short)((buf[10])<<8 )| buf[11];//23
-	mpu6500_real_data.Gyro_Y=mpu6500_raw_data.Gyro_Y/1880.0f-offset_y;
-	
-	
-	mpu6500_raw_data.Gyro_Z=(short)((buf[12])<<8 )| buf[13];//45
-	mpu6500_real_data.Gyro_Z=mpu6500_raw_data.Gyro_Z/1880.0f-offset_z;   //GYRO_SEN
-	*/
 #endif
 }
 //void MPU6500_ReadACCEL(void){

@@ -28,11 +28,9 @@ void BSP_Init(void)	//注意初始化的顺序
 	USART6_DMA_Init();
 	USART2_DMA_Init();
 	USART3_DMA_Init();
-	
 	#ifdef tiaocan
 	UART8_Init();
 	#endif
-	
 	
 	TIM9_Init(); //duoji
 	TIM2_Init();  

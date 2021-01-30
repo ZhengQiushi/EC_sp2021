@@ -218,10 +218,10 @@ void TestRc(void)
 ****************************************************************************************/
 void ItoE(void)
 {
-	  RC_Ex_Ctl.rc.ch0 = RC_Ctl.rc.ch0 - 1024;
-	  RC_Ex_Ctl.rc.ch1 = RC_Ctl.rc.ch1 - 1024;
-	  RC_Ex_Ctl.rc.ch2 = RC_Ctl.rc.ch2 - 1024;
-	  RC_Ex_Ctl.rc.ch3 = -(RC_Ctl.rc.ch3 - 1024);//pitch dianjifanzhuang
+	  RC_Ex_Ctl.rc.ch0 = (RC_Ctl.rc.ch0 - 1024);
+	  RC_Ex_Ctl.rc.ch1 = (RC_Ctl.rc.ch1 - 1024);
+	  RC_Ex_Ctl.rc.ch2 = RC_Ctl.rc.ch2- 1024; ///yaokongqi!!
+	  RC_Ex_Ctl.rc.ch3 = (RC_Ctl.rc.ch3 - 1024);//pitch dianjifanzhuang
 	  RC_Ex_Ctl.rc.s1  = RC_Ctl.rc.s1;
 	  RC_Ex_Ctl.rc.s2  = RC_Ctl.rc.s2;
 

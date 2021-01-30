@@ -142,13 +142,13 @@ void CAN1_RX0_IRQHandler(void)
 		{
 				
         CAN_Receive(CAN1, CAN_FIFO0, &rx_message);
-					if(rx_message.StdId == 0x207)      //拨弹轮电机           
-					{ 	
-						auto_aim_count_++;		
-							current_speed_207 = (rx_message.Data[2]<<8) | rx_message.Data[3];		
-							current_position_207 = (rx_message.Data[0]<<8) | rx_message.Data[1];	
-					}
-					else if(rx_message.StdId == 0x502)      //ADI pitch         
+//					if(rx_message.StdId == 0x207)      //拨弹轮电机           
+//					{ 	
+//						auto_aim_count_++;		
+//							current_speed_207 = (rx_message.Data[2]<<8) | rx_message.Data[3];		
+//							current_position_207 = (rx_message.Data[0]<<8) | rx_message.Data[1];	
+	//				}
+					if(rx_message.StdId == 0x502)      //ADI pitch         
 					{ 	
 						adi_angle.b[0]=rx_message.Data[0];
 						adi_angle.b[1]=rx_message.Data[1];
@@ -286,7 +286,7 @@ u8 CAN2_Mode_Init(u8 tsjw,u8 tbs2,u8 tbs1,u16 brp,u8 mode)
 }   
 
 
-static int times = 0;
+static int times=0;
 void CAN2_RX0_IRQHandler(void)
 {   
 	CanRxMsg rx_message;
@@ -297,13 +297,14 @@ void CAN2_RX0_IRQHandler(void)
 	
         if(rx_message.StdId == 0x205)           //206 是pitch
         {             
-            current_position_205 = (rx_message.Data[0]<<8) | rx_message.Data[1];	//数据8位，要的16位，来两个数据
-						yaw_speed=(rx_message.Data[2]<<8)|rx_message.Data[3];
+            current_position_205 = 8192-((rx_message.Data[0]<<8) | rx_message.Data[1]);	//数据8位，要的16位，来两个数据
+						yaw_speed=-((rx_message.Data[2]<<8)|rx_message.Data[3]);
         }
-				else if(rx_message.StdId == 0x208)           //206 是pitch
+				else if(rx_message.StdId == 0x207)           //206 是pitch
         {             
-            current_position_205 = (rx_message.Data[0]<<8) | rx_message.Data[1];	
-						yaw_speed=(rx_message.Data[2]<<8)|rx_message.Data[3];
+						auto_aim_count_++;		
+							current_speed_207 = (rx_message.Data[2]<<8) | rx_message.Data[3];		
+							current_position_207 = (rx_message.Data[0]<<8) | rx_message.Data[1];	
         }
         else if(rx_message.StdId == 0x206)      //205 是YAW轴            
         { 
@@ -312,16 +313,14 @@ void CAN2_RX0_IRQHandler(void)
         }
 				else if(rx_message.StdId == 0x201)      //左前          
         { 
-             current_cm_201 = (rx_message.Data[2]<<8) | rx_message.Data[3];	
+//					times++;
+//					if(times==50){
+//						UART_DMA_SEND(ext_power_heat_data.chassis_power);
+//						times=0;
+//					}
+					UART_DMA_SEND(ext_power_heat_data.chassis_power);
+          current_cm_201 = (rx_message.Data[2]<<8) | rx_message.Data[3];	
 					t_i_1=(rx_message.Data[4]<<8) | rx_message.Data[5];
-			
-			times++;
-			if ( times == 50 )
-			{
-				times = 0;
-				UART_DMA_SEND(current_cm_201);	
-			}			
-			
         }
 				else if(rx_message.StdId == 0x202)       //右前         
         { 
@@ -366,7 +365,7 @@ void continue_value(void)   //增大值 使之连续
 	{
 		if(abs(previous_position_205-current_position_205)>6000)
 		{
-			if(previous_position_205<1000)
+			if(abs(previous_position_205)<1000)
 			{
 				rotate_205_count-=1;
 			}
@@ -475,7 +474,7 @@ void CAN1_Feed_Cmd(int16_t l_data)
     tx_message.Data[6] = 0x00;
     tx_message.Data[7] = 0x00;
     
-    CAN_Transmit(CAN1,&tx_message);
+    CAN_Transmit(CAN2,&tx_message);
 }
 
 
@@ -559,7 +558,7 @@ void CAN1_Cmd_standard(void)
  *Output   ：无 
  *Description : 控制云台运动，包括pitch轴、yaw轴和拨弹轮
 ****************************************************************************************/
-void CAN2_Cmd_All(int16_t current_205,int16_t current_206)
+void CAN2_Cmd_All(int16_t current_205,int16_t current_206,int16_t l_data)
 {
     CanTxMsg tx_message;
     
@@ -581,8 +580,8 @@ void CAN2_Cmd_All(int16_t current_205,int16_t current_206)
     tx_message.Data[1] = (unsigned char) current_205;
     tx_message.Data[2] = (unsigned char)(current_206 >> 8);
     tx_message.Data[3] = (unsigned char) current_206;
-    tx_message.Data[4] = 0x00;
-    tx_message.Data[5] = 0x00;
+    tx_message.Data[4] = (unsigned char)(l_data >> 8);
+    tx_message.Data[5] = (unsigned char) l_data;
     tx_message.Data[6] = 0x00;
     tx_message.Data[7] = 0x00;
 		#endif
