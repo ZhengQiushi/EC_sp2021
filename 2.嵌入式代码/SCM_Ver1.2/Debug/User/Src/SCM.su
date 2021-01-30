@@ -1,0 +1,7 @@
+SCM.c:32:6:SCM_Init	8	static
+SCM.c:60:6:SCM_ControlLoop	8	static
+SCM.c:128:6:SCM_SetCurrent	32	static
+SCM.c:135:6:SCM_SetPower	40	static
+SCM.c:155:6:SCM_MonitorUpdate	16	static
+SCM.c:175:10:PowerOf10	24	static
+SCM.c:181:6:SCM_Display	48	static

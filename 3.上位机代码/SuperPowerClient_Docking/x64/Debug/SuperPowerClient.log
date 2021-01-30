@@ -1,0 +1,259 @@
+﻿  crc32.c
+  glad.c
+  正在生成代码...
+  imgui.cpp
+  imgui_custom.cpp
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(122,26): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(122,23): warning C4244: “初始化”: 从“double”转换到“const float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(160,25): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(160,19): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(169,60): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(170,28): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(173,52): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(203,77): warning C4305: “参数”: 从“double”到“float”截断
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(205,85): warning C4305: “参数”: 从“double”到“float”截断
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(205,51): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(263,69): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(267,76): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=double
+          ]
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(267,117): warning C4305: “参数”: 从“double”到“float”截断
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(273,76): warning C4244: “参数”: 从“T”转换到“float”，可能丢失数据
+          with
+          [
+              T=double
+          ]
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(273,117): warning C4305: “参数”: 从“double”到“float”截断
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(274,76): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(281,133): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(281,85): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(286,133): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(286,85): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_glfw.cpp
+  imgui_impl_opengl3.cpp
+  imgui_plot.cpp
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_plot.cpp(927,19): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+  imgui_widgets.cpp
+  main.cpp
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(218,1): error C2011: “ImVec2”:“struct”类型重定义
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(217): message : 参见“ImVec2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(231,1): error C2011: “ImVec4”:“struct”类型重定义
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(230): message : 参见“ImVec4”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(250,76): error C2572: “ImGui::CreateContext”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(250): message : 参见“ImGui::CreateContext”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(251,64): error C2572: “ImGui::DestroyContext”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(251): message : 参见“ImGui::DestroyContext”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(264,59): error C2572: “ImGui::ShowDemoWindow”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(264): message : 参见“ImGui::ShowDemoWindow”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(265,60): error C2572: “ImGui::ShowAboutWindow”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(265): message : 参见“ImGui::ShowAboutWindow”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(266,62): error C2572: “ImGui::ShowMetricsWindow”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(266): message : 参见“ImGui::ShowMetricsWindow”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(267,63): error C2572: “ImGui::ShowStyleEditor”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(267): message : 参见“ImGui::ShowStyleEditor”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(274,63): error C2572: “ImGui::StyleColorsDark”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(274): message : 参见“ImGui::StyleColorsDark”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(275,66): error C2572: “ImGui::StyleColorsClassic”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(275): message : 参见“ImGui::StyleColorsClassic”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(276,64): error C2572: “ImGui::StyleColorsLight”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(276): message : 参见“ImGui::StyleColorsLight”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(289,68): error C2572: “ImGui::Begin”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(289): message : 参见“ImGui::Begin”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(289,99): error C2572: “ImGui::Begin”: 重定义默认参数 : 参数 2
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(289): message : 参见“ImGui::Begin”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(297,88): error C2027: 使用了未定义类型“ImVec2”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(217): message : 参见“ImVec2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(297,81): error C2064: 项不会计算为接受 2 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(297,108): error C2572: “ImGui::BeginChild”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(297): message : 参见“ImGui::BeginChild”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(297,140): error C2572: “ImGui::BeginChild”: 重定义默认参数 : 参数 2
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(297): message : 参见“ImGui::BeginChild”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(298,80): error C2027: 使用了未定义类型“ImVec2”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(217): message : 参见“ImVec2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(298,73): error C2064: 项不会计算为接受 2 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(298,100): error C2572: “ImGui::BeginChild”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(298): message : 参见“ImGui::BeginChild”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(298,132): error C2572: “ImGui::BeginChild”: 重定义默认参数 : 参数 2
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(298): message : 参见“ImGui::BeginChild”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(305,69): error C2572: “ImGui::IsWindowFocused”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(305): message : 参见“ImGui::IsWindowFocused”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(306,69): error C2572: “ImGui::IsWindowHovered”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(306): message : 参见“ImGui::IsWindowHovered”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(316,114): error C2027: 使用了未定义类型“ImVec2”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(217): message : 参见“ImVec2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(316,107): error C2064: 项不会计算为接受 2 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(316,82): error C2572: “ImGui::SetNextWindowPos”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(316): message : 参见“ImGui::SetNextWindowPos”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(317,84): error C2572: “ImGui::SetNextWindowSize”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(317): message : 参见“ImGui::SetNextWindowSize”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(318,142): error C2572: “ImGui::SetNextWindowSizeConstraints”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(318): message : 参见“ImGui::SetNextWindowSizeConstraints”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(318,177): error C2572: “ImGui::SetNextWindowSizeConstraints”: 重定义默认参数 : 参数 2
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(318): message : 参见“ImGui::SetNextWindowSizeConstraints”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(320,85): error C2572: “ImGui::SetNextWindowCollapsed”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(320): message : 参见“ImGui::SetNextWindowCollapsed”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(324,78): error C2572: “ImGui::SetWindowPos”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(324): message : 参见“ImGui::SetWindowPos”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(325,80): error C2572: “ImGui::SetWindowSize”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(325): message : 参见“ImGui::SetWindowSize”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(326,81): error C2572: “ImGui::SetWindowCollapsed”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(326): message : 参见“ImGui::SetWindowCollapsed”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(329,96): error C2572: “ImGui::SetWindowPos”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(329): message : 参见“ImGui::SetWindowPos”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(330,98): error C2572: “ImGui::SetWindowSize”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(330): message : 参见“ImGui::SetWindowSize”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(331,99): error C2572: “ImGui::SetWindowCollapsed”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(331): message : 参见“ImGui::SetWindowCollapsed”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(349,67): error C2572: “ImGui::SetScrollHereX”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(349): message : 参见“ImGui::SetScrollHereX”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(350,67): error C2572: “ImGui::SetScrollHereY”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(350): message : 参见“ImGui::SetScrollHereY”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(351,85): error C2572: “ImGui::SetScrollFromPosX”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(351): message : 参见“ImGui::SetScrollFromPosX”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(352,85): error C2572: “ImGui::SetScrollFromPosY”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(352): message : 参见“ImGui::SetScrollFromPosY”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(359,55): error C2572: “ImGui::PopStyleColor”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(359): message : 参见“ImGui::PopStyleColor”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(362,53): error C2572: “ImGui::PopStyleVar”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(362): message : 参见“ImGui::PopStyleVar”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(367,73): error C2572: “ImGui::GetColorU32”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(367): message : 参见“ImGui::GetColorU32”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(376,70): error C2572: “ImGui::PushTextWrapPos”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(376): message : 参见“ImGui::PushTextWrapPos”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(391,64): error C2572: “ImGui::SameLine”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(391): message : 参见“ImGui::SameLine”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(391,85): error C2572: “ImGui::SameLine”: 重定义默认参数 : 参数 2
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(391): message : 参见“ImGui::SameLine”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(395,53): error C2572: “ImGui::Indent”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(395): message : 参见“ImGui::Indent”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(396,55): error C2572: “ImGui::Unindent”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(396): message : 参见“ImGui::Unindent”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(431,86): error C2572: “ImGui::TextUnformatted”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(431): message : 参见“ImGui::TextUnformatted”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(448,83): error C2027: 使用了未定义类型“ImVec2”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(217): message : 参见“ImVec2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(448,76): error C2064: 项不会计算为接受 2 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(452,111): error C2027: 使用了未定义类型“ImVec2”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(217): message : 参见“ImVec2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(452,104): error C2064: 项不会计算为接受 2 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(452,144): error C2027: 使用了未定义类型“ImVec2”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(217): message : 参见“ImVec2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(452,137): error C2064: 项不会计算为接受 2 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(452,182): error C2027: 使用了未定义类型“ImVec4”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(230): message : 参见“ImVec4”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(452,175): error C2064: 项不会计算为接受 4 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(452,226): error C2027: 使用了未定义类型“ImVec4”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(230): message : 参见“ImVec4”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(452,219): error C2064: 项不会计算为接受 4 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(453,117): error C2027: 使用了未定义类型“ImVec2”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(217): message : 参见“ImVec2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(453,110): error C2064: 项不会计算为接受 2 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(453,151): error C2027: 使用了未定义类型“ImVec2”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(217): message : 参见“ImVec2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(453,144): error C2064: 项不会计算为接受 2 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(453,211): error C2027: 使用了未定义类型“ImVec4”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(230): message : 参见“ImVec4”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(453,204): error C2064: 项不会计算为接受 4 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(453,253): error C2027: 使用了未定义类型“ImVec4”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(230): message : 参见“ImVec4”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(453,246): error C2064: 项不会计算为接受 4 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(453,178): error C2572: “ImGui::ImageButton”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(453): message : 参见“ImGui::ImageButton”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(458,90): error C2027: 使用了未定义类型“ImVec2”
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(217): message : 参见“ImVec2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(458,82): error C2064: 项不会计算为接受 2 个参数的函数
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(458,118): error C2572: “ImGui::ProgressBar”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(458): message : 参见“ImGui::ProgressBar”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(464,110): error C2572: “ImGui::BeginCombo”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(464): message : 参见“ImGui::BeginCombo”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(466,150): error C2572: “ImGui::Combo”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(466): message : 参见“ImGui::Combo”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(467,144): error C2572: “ImGui::Combo”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(467): message : 参见“ImGui::Combo”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(468,200): error C2572: “ImGui::Combo”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(468): message : 参见“ImGui::Combo”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(478,84): error C2572: “ImGui::DragFloat”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(478): message : 参见“ImGui::DragFloat”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(478,104): error C2572: “ImGui::DragFloat”: 重定义默认参数 : 参数 2
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(478): message : 参见“ImGui::DragFloat”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(478,124): error C2572: “ImGui::DragFloat”: 重定义默认参数 : 参数 3
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(478): message : 参见“ImGui::DragFloat”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(478,151): error C2572: “ImGui::DragFloat”: 重定义默认参数 : 参数 4
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(478): message : 参见“ImGui::DragFloat”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(478,173): error C2572: “ImGui::DragFloat”: 重定义默认参数 : 参数 5
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(478): message : 参见“ImGui::DragFloat”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(479,87): error C2572: “ImGui::DragFloat2”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(479): message : 参见“ImGui::DragFloat2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(479,107): error C2572: “ImGui::DragFloat2”: 重定义默认参数 : 参数 2
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(479): message : 参见“ImGui::DragFloat2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(479,127): error C2572: “ImGui::DragFloat2”: 重定义默认参数 : 参数 3
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(479): message : 参见“ImGui::DragFloat2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(479,154): error C2572: “ImGui::DragFloat2”: 重定义默认参数 : 参数 4
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(479): message : 参见“ImGui::DragFloat2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(479,176): error C2572: “ImGui::DragFloat2”: 重定义默认参数 : 参数 5
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(479): message : 参见“ImGui::DragFloat2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(480,87): error C2572: “ImGui::DragFloat3”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(480): message : 参见“ImGui::DragFloat3”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(480,107): error C2572: “ImGui::DragFloat3”: 重定义默认参数 : 参数 2
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(480): message : 参见“ImGui::DragFloat3”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(480,127): error C2572: “ImGui::DragFloat3”: 重定义默认参数 : 参数 3
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(480): message : 参见“ImGui::DragFloat3”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(480,154): error C2572: “ImGui::DragFloat3”: 重定义默认参数 : 参数 4
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(480): message : 参见“ImGui::DragFloat3”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(480,176): error C2572: “ImGui::DragFloat3”: 重定义默认参数 : 参数 5
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(480): message : 参见“ImGui::DragFloat3”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(481,87): error C2572: “ImGui::DragFloat4”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(481): message : 参见“ImGui::DragFloat4”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(481,107): error C2572: “ImGui::DragFloat4”: 重定义默认参数 : 参数 2
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(481): message : 参见“ImGui::DragFloat4”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(481,127): error C2572: “ImGui::DragFloat4”: 重定义默认参数 : 参数 3
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(481): message : 参见“ImGui::DragFloat4”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(481,154): error C2572: “ImGui::DragFloat4”: 重定义默认参数 : 参数 4
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(481): message : 参见“ImGui::DragFloat4”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(481,176): error C2572: “ImGui::DragFloat4”: 重定义默认参数 : 参数 5
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(481): message : 参见“ImGui::DragFloat4”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(482,124): error C2572: “ImGui::DragFloatRange2”: 重定义默认参数 : 参数 1
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(482): message : 参见“ImGui::DragFloatRange2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(482,144): error C2572: “ImGui::DragFloatRange2”: 重定义默认参数 : 参数 2
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(482): message : 参见“ImGui::DragFloatRange2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(482,164): error C2572: “ImGui::DragFloatRange2”: 重定义默认参数 : 参数 3
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(482): message : 参见“ImGui::DragFloatRange2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(482,191): error C2572: “ImGui::DragFloatRange2”: 重定义默认参数 : 参数 4
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(482): message : 参见“ImGui::DragFloatRange2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(482,224): error C2572: “ImGui::DragFloatRange2”: 重定义默认参数 : 参数 5
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(482): message : 参见“ImGui::DragFloatRange2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(482,244): error C2572: “ImGui::DragFloatRange2”: 重定义默认参数 : 参数 6
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui.h(482): message : 参见“ImGui::DragFloatRange2”的声明
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\imgui\imgui.h(482,249): fatal error C1003: 错误计数超过 100；正在停止编译
+  std_image.cpp
+  Serial.cpp
+  sp_scm.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005: “APIENTRY”: 宏重定义
+D:\Code\VisualStudio\Include\glad\glad.h(32): message : 参见“APIENTRY”的前一个定义
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(107,21): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(110,60): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(111,60): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(112,63): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(113,63): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(119,59): warning C4305: “参数”: 从“double”到“float”截断
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(128,52): warning C4305: “参数”: 从“double”到“float”截断
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(134,47): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(139,49): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(144,49): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(151,51): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(156,53): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(161,53): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(339,51): warning C4305: “参数”: 从“double”到“float”截断
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(343,51): warning C4305: “参数”: 从“double”到“float”截断
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(347,51): warning C4305: “参数”: 从“double”到“float”截断
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(384,50): warning C4305: “参数”: 从“double”到“float”截断
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(388,50): warning C4305: “参数”: 从“double”到“float”截断
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\user\sp_scm.cpp(677,53): warning C4805: “|=”: 在操作中将类型“unsigned char”与类型“bool”混合不安全
+  正在生成代码...
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(137): warning C4715: “ImGui::BufferingBar”: 不是所有的控件路径都返回值
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(222): warning C4715: “ImGui::EnergyPanel”: 不是所有的控件路径都返回值
+D:\Document\课内\嵌入式系统\嵌入式系统课程设计\3.上位机代码\SuperPowerClient_Docking\imgui\imgui_custom.cpp(174): warning C4715: “ImGui::Spinner”: 不是所有的控件路径都返回值

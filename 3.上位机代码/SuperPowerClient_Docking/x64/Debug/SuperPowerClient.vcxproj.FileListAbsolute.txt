@@ -1,0 +1,4 @@
+D:\Code\VisualStudio\OpenGLPrj\SuperPowerClient\x64\Debug\SuperPowerClient.exe
+D:\Code\VisualStudio\OpenGLPrj\SuperPowerClient\x64\Debug\SuperPowerClient.pdb
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\x64\Debug\SuperPowerClient.exe
+D:\Code\VisualStudio\Projects\SuperPowerClient_Docking\x64\Debug\SuperPowerClient.pdb

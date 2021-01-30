@@ -1,0 +1,5 @@
+upper.c:32:6:UART_InitForUpper	16	static
+upper.c:38:6:USER_UART_IRQHandler	24	static
+upper.c:51:6:USER_UART_IDLECallback	56	static
+upper.c:141:6:USER_UART1_DMA_Transmit2Upper	32	static
+upper.c:214:9:crc_check	24	static

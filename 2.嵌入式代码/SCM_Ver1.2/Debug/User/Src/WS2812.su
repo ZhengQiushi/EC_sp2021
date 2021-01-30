@@ -1,0 +1,3 @@
+WS2812.c:10:9:WS2812SetColor	16	static
+WS2812.c:23:6:RGB_LED_Write_Byte	24	static
+WS2812.c:40:6:RGB_LedsArrayTransmit	16	static

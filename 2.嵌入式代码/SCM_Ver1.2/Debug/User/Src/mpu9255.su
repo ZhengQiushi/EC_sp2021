@@ -1,0 +1,11 @@
+mpu9255.c:14:6:IMU_TASK	24	static
+mpu9255.c:20:9:MPU9255_ZeroOffset	32	static
+mpu9255.c:49:6:MPU9255_ConvertData	32	static
+mpu9255.c:91:6:MPU9255_ConvertData0	32	static
+mpu9255.c:102:9:MPU9255_Write_Reg	24	static
+mpu9255.c:122:9:MPU9255_Read_Reg	24	static
+mpu9255.c:144:7:convert	24	static
+mpu9255.c:156:9:MPU9255_Init	16	static
+mpu9255.c:186:6:MPU9255_Read	24	static
+mpu9255.c:214:6:mpuCsEnable	8	static
+mpu9255.c:218:6:mpuCsDisable	8	static

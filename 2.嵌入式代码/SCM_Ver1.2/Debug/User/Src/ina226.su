@@ -1,0 +1,2 @@
+ina226.c:22:6:Ina226_Init	24	static
+ina226.c:50:6:Ina226_Read	24	static
