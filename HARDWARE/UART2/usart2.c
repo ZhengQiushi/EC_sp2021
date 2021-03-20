@@ -177,8 +177,8 @@ void USART2_IRQHandler(void)
 //		else
 //			Auto_Error_Count ++;
 		update_flag= Auto_Frame_Large_Unpack();
-		DMA_SetCurrDataCounter(DMA1_Stream5,AUTO_FRAME_LENGTH);  //设置传输数据长度
-    DMA_Cmd(DMA1_Stream5,ENABLE);  //打开DMA
+		DMA_SetCurrDataCounter(DMA1_Stream5,AUTO_FRAME_LENGTH);  //璁剧疆浼犺緭鏁版嵁闀垮害
+    DMA_Cmd(DMA1_Stream5,ENABLE);  //鎵撳紑DMA
 		
 	}
 }
@@ -241,18 +241,19 @@ void sendtoComputer(int timestamp_doing, int auto_aim, int big_buff,int entering
 	else
 		sendtoCom_frame.extra[1] = 0x00;
 	
-	packFrame(sendbuffer,&sendtoCom_frame);//减少每次搬运内存时间
+	packFrame(sendbuffer,&sendtoCom_frame);//鍑忓皯姣忔鎼繍鍐呭瓨鏃堕棿
 //  DMA_Cmd(DMA1_Stream6,ENABLE);
 //	USART_DMACmd(USART2, USART_DMAReq_Tx, ENABLE);
 	//DMA_Cmd(DMA1_Stream6,DISABLE);
 	
 	
 	
-	 DMA_Cmd(DMA1_Stream6, DISABLE);                      //??DMA??   
+ 
       
-    while (DMA_GetCmdStatus(DMA1_Stream6) != DISABLE){}  //??DMA?????    
-          
-    DMA_SetCurrDataCounter(DMA1_Stream6,15);          //?????    
+    while (DMA_GetCmdStatus(DMA1_Stream6) != DISABLE){}  //waiting for the completion of last transmission 
+	
+    DMA_Cmd(DMA1_Stream6, DISABLE);                      //ready to restart 
+    DMA_SetCurrDataCounter(DMA1_Stream6,15);          	 //load the corresponding bits for fram
 		
-    DMA_Cmd(DMA1_Stream6, ENABLE);     
+    DMA_Cmd(DMA1_Stream6, ENABLE);     			 // strat to transmit
 }
