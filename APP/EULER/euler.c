@@ -15,9 +15,9 @@
 volatile float beta = betaDef;								// 2 * proportional gain (Kp)
 volatile float q0 = 1.0f, q1 = 0.0f, q2 = 0.0f, q3 = 0.0f;	// quaternion of sensor frame relative to auxiliary frame
 float Yaw_gyro,Roll_gyro,Pitch_gyro;
-float Yawdelta;
 float Yaw_mag,Roll_accel,Pitch_accel;
-float Yaw,Roll,Pitch,Yaw_Offset,Pitch_Offset,Roll_Offset;
+float Yaw,Roll,Pitch,Yaw_Offset,Pitch_Offset,Roll_Offset,Pitch_m;
+float Yaw_watch;
 float dt=0.001;//??:dt????kalman???????
 
 float angle, angle_dot;//??????
@@ -38,7 +38,7 @@ int count = 0;
 float delay_speed=0;
 int euler_count=0;
 double yaw_zero_float=0;
-double zf_result=0.000035;
+double zf_result=0.0f;
 
 float invSqrt(float num);
 void MadgwickAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float az) ;
@@ -168,9 +168,8 @@ void update_euler_mpu(void){
 *Original
 ************************************/
 
-
 void update_euler_mpu(void){
-	float oldYaw=Yaw;
+	
 	float Roll_sin,Roll_cos,Pitch_sin,Pitch_cos;
 	float a,gx,gy,gz,dx,dy,dz;
 	static const float K=1.0f;  //?????????? ?? ????????
@@ -202,11 +201,9 @@ void update_euler_mpu(void){
 	
 	Pitch=Pitch+(Roll_cos*gy-Roll_sin*gz)*euler_dt;
 	
-
-
-	Yawdelta=	(Roll_sin*gy+Roll_cos*gz)/Pitch_cos*euler_dt;
-	if (fabs(Yawdelta)>0.0003)
-			Yaw_gyro=Yaw+(Roll_sin*gy+Roll_cos*gz)/Pitch_cos*euler_dt;
+	Yaw_gyro=Yaw+
+	(Roll_sin*gy+Roll_cos*gz)/Pitch_cos*euler_dt;
+	
 	if(Roll>PI){	
 		Roll-=2.0f*PI;
 	}else if(Roll<-PI){
@@ -227,8 +224,10 @@ void update_euler_mpu(void){
 //	{
 		
 		Yaw=K*Yaw_gyro+(1.0f-K)*Yaw_mag+zf_result;
-
-
+	
+		Yaw_watch=Yaw*57.3f;
+		//Yaw=-Yaw;
+//	}
 //	else if(remoteState == NORMAL_REMOTE_STATE)
 //	{
 //		Yaw=K*Yaw_gyro+(1.0f-K)*Yaw_mag-dynamic_zero_float_offset;
@@ -241,6 +240,7 @@ void update_euler_mpu(void){
 		
 		count++;
 	}
+	Pitch_m = (continuous_current_position_206-MIDDLE_PITCH)/8192.0f*2*PI;
 	
 }
 
@@ -316,112 +316,80 @@ void update_euler_mpu(void){
 *quaternion
 ******************************/
 /*
-
 void update_euler_mpu(void){
-	float Kp=2;
-	float Ki=0.01;
-	float norm;
-	float hx, hy, hz, bx, bz;
-	float vx, vy, vz, wx, wy, wz;
-	float ex, ey, ez, halfT;
-	float tempq0,tempq1,tempq2,tempq3;
-	float gx,gy,gz,ax,ay,az,mx,my,mz;
-	float q0q0 = q0*q0;
-	float q0q1 = q0*q1;
-	float q0q2 = q0*q2;
-	float q0q3 = q0*q3;
-	float q1q1 = q1*q1;
-	float q1q2 = q1*q2;
-	float q1q3 = q1*q3;
-	float q2q2 = q2*q2;   
-	float q2q3 = q2*q3;
-	float q3q3 = q3*q3;  
-  volatile float        exInt, eyInt, ezInt;   	
+	
+#ifdef hengfang
+	
+  float  norm,norm1;
+  static const float Kp=2.0f;
+  static const float Ki=0.5f;
+  static const float halfT=0.5;
+	float ex,ey,ez;
+	float vx,vy,vz,ay,ax,az,gx,gy,gz;
+  float q0=1.0f,q1=0.0f,q2=0.0f,q3=0.0f;
+ float exInt=0.0f,eyInt=0.0f,ezInt=0.0f;
   MPU6500_Read();
-	gx = mpu6500_real_data.Gyro_X;
-	gy = mpu6500_real_data.Gyro_Y;
-	gz = mpu6500_real_data.Gyro_Z;
-	ax = mpu6500_real_data.Accel_X;
-	ay = mpu6500_real_data.Accel_Y;
-	az = mpu6500_real_data.Accel_Z;
-	mx = 0;
-	my = 0;
-	mz = 0;
-
-
-	halfT       = (2/ 2000.0f);
-
 	
-
-	norm = inv_sqrt(ax*ax + ay*ay + az*az);       
-	ax = ax * norm;
-	ay = ay * norm;
-	az = az * norm;
+//	gx=mpu6500_real_data.Gyro_X;
+//	gy=mpu6500_real_data.Gyro_Y;
+//	gz=mpu6500_real_data.Gyro_Z;
 	
-	#ifdef IST8310
-		norm = inv_sqrt(mx*mx + my*my + mz*mz);          
-		mx = mx * norm;
-		my = my * norm;
-		mz = mz * norm; 
-	#else
-		mx = 0;
-		my = 0;
-		mz = 0;		
-	#endif
-
-	hx = 2.0f*mx*(0.5f - q2q2 - q3q3) + 2.0f*my*(q1q2 - q0q3) + 2.0f*mz*(q1q3 + q0q2);
-	hy = 2.0f*mx*(q1q2 + q0q3) + 2.0f*my*(0.5f - q1q1 - q3q3) + 2.0f*mz*(q2q3 - q0q1);
-	hz = 2.0f*mx*(q1q3 - q0q2) + 2.0f*my*(q2q3 + q0q1) + 2.0f*mz*(0.5f - q1q1 - q2q2);         
-	bx = sqrt((hx*hx) + (hy*hy));
-	bz = hz; 
+  norm=invSqrt(mpu6500_real_data.Accel_X*mpu6500_real_data.Accel_X+mpu6500_real_data.Accel_Y*mpu6500_real_data.Accel_Y
+	     +mpu6500_real_data.Accel_Z*mpu6500_real_data.Accel_Z);
 	
-
-	vx = 2.0f*(q1q3 - q0q2);
-	vy = 2.0f*(q0q1 + q2q3);
-	vz = q0q0 - q1q1 - q2q2 + q3q3;
-	wx = 2.0f*bx*(0.5f - q2q2 - q3q3) + 2.0f*bz*(q1q3 - q0q2);
-	wy = 2.0f*bx*(q1q2 - q0q3) + 2.0f*bz*(q0q1 + q2q3);
-	wz = 2.0f*bx*(q0q2 + q1q3) + 2.0f*bz*(0.5f - q1q1 - q2q2);  
+	ax=mpu6500_real_data.Accel_X*norm;
+	ay=mpu6500_real_data.Accel_Y*norm;
+	az=mpu6500_real_data.Accel_Z*norm;//单元化
 	
-
-	ex = (ay*vz - az*vy) + (my*wz - mz*wy);
-	ey = (az*vx - ax*vz) + (mz*wx - mx*wz);
-	ez = (ax*vy - ay*vx) + (mx*wy - my*wx);
-
-
-	if(ex != 0.0f && ey != 0.0f && ez != 0.0f)
-	{
-		exInt = exInt + ex * Ki * halfT;
-		eyInt = eyInt + ey * Ki * halfT;	
-		ezInt = ezInt + ez * Ki * halfT;
-		
-		gx = gx + Kp*ex + exInt;
-		gy = gy + Kp*ey + eyInt;
-		gz = gz + Kp*ez + ezInt;
-	}
+	vx = (q1 * q3 - q0 * q2);
+  vy = (q0 * q1 + q2 * q3);
+  vz = q0 * q0 - 0.5f + q3 * q3;//估计方向的重力
+  //vz = q0 * q0 - q1 * q1 - q2 * q2 + q3 * q3;
 	
-	tempq0 = q0 + (-q1*gx - q2*gy - q3*gz) * halfT;
-	tempq1 = q1 + (q0*gx + q2*gz - q3*gy) * halfT;
-	tempq2 = q2 + (q0*gy - q1*gz + q3*gx) * halfT;
-	tempq3 = q3 + (q0*gz + q1*gy - q2*gx) * halfT;  
+	ex = (ay * vz - az * vy);
+  ey = (az * vx - ax * vz);
+  ez = (ax * vy - ay * vx);//在机体坐标系下做向量叉积得到补偿量
+  
+	exInt += ex * Ki * (1/50);
+  eyInt += ey * Ki * (1/50);
+  ezInt += ez * Ki * (1/50);//积分误差比例积分增益，补偿角速度
 
 
-	norm = inv_sqrt(tempq0*tempq0 + tempq1*tempq1 + tempq2*tempq2 + tempq3*tempq3);
-	q0 = tempq0 * norm;
-	q1 = tempq1 * norm;
-	q2 = tempq2 * norm;
-	q3 = tempq3 * norm;	
-	
+  mpu6500_real_data.Gyro_X += Kp * ex + exInt;
+  mpu6500_real_data.Gyro_Y += Kp * ey + eyInt;
+  mpu6500_real_data.Gyro_Z+= Kp * ez + ezInt;//调整后的陀螺仪测量
 
-	Yaw = -atan2(2*q1*q2 + 2*q0*q3, -2*q2*q2 - 2*q3*q3 + 1); 
 
-	Pitch = -asin(-2*q1*q3 + 2*q0*q2);   
+  mpu6500_real_data.Gyro_X *= 0.5*(1/50);
+  mpu6500_real_data.Gyro_Y *= 0.5*(1/50);
+  mpu6500_real_data.Gyro_Z *= 0.5*(1/50);
+  q0 += (-q1 * mpu6500_real_data.Gyro_X - q2 * mpu6500_real_data.Gyro_Y - q3 * mpu6500_real_data.Gyro_Z);
+  q1 += (q0 * mpu6500_real_data.Gyro_X+ q2 * mpu6500_real_data.Gyro_Z - q3 * mpu6500_real_data.Gyro_Y);
+  q2 += (q0 * mpu6500_real_data.Gyro_Y - q1 * mpu6500_real_data.Gyro_Z + q3 * mpu6500_real_data.Gyro_X);
+  q3 += (q0 * mpu6500_real_data.Gyro_Z + q1 * mpu6500_real_data.Gyro_Y - q2 * mpu6500_real_data.Gyro_X);//整合四元数
+ 
 
-	Roll =  atan2(2*q2*q3 + 2*q0*q1, -2*q1*q1 - 2*q2*q2 + 1);
+
+  // 1/x /= y ; x /= y ; 1/x *= y   //use which
+  norm1 = sqrt(q0 * q0 + q1 * q1 + q2 * q2 + q3 * q3);
+  q0 /= norm1;
+  q1 /= norm1;
+  q2 /= norm1;
+  q3 /= norm1;//正常化四元数
+
+//pitch = math.asin(-2 * q1 * q3 + 2 * q0 * q2) * 57.3
+//roll = math.atan2(2 * q2 * q3 + 2 * q0 * q1, -2 * q1 * q1 - 2 * q2 * q2 + 1) * 57.3
+//yaw = math.atan2(2 * (q1 * q2 + q0 * q3), q0 * q0 + q1 * q1 - q2 * q2 - q3 * q3) * 57.3
+
+  Pitch = asin(2 * q1 * q3 + 2 * q0 * q2) ;
+  Roll = atan2(2 * q1 * q2 - 2 * q0 * q3, 2 * q0 * q0 + 2 * q1 * q1 - 1) ;
+  Yaw = -atan2(2 * q2 * q3 - 2 * q0 * q1, 2 * q0 * q0 + 2 * q3 * q3 - 1) ;//得到角度
+#endif
+
 }
-
 */
-/*
+
+
 void MadgwickAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float az) {
 	float recipNorm;
 	float s0, s1, s2, s3;
@@ -494,7 +462,7 @@ void MadgwickAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, flo
   Yaw = -atan2(2 * q2 * q3 - 2 * q0 * q1, 2 * q0 * q0 + 2 * q3 * q3 - 1) ;//得到角度
 }
 
-*/
+
 float invSqrt(float num) {
 	float halfnum = 0.5f * num;
 	float y = num;

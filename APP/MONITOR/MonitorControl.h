@@ -17,4 +17,7 @@ void clear_zero_float(void);
 void Reset_monitor(void);
 void Rescue_Moni(void);
 void press_send_rectangle(void);
+int Power_based_on_level(void);
+int max_output_speed_based_on_level(void);
+float heat_based_on_level(void);
 #endif

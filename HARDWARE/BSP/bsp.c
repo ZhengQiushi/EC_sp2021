@@ -2,7 +2,8 @@
 LPF_FirstOrder_type filter_206;
 LPF_FirstOrder_type filter_205;
 LPF_FirstOrder_type filter_207;
-
+float gx_offset=0.0f,gy_offset=0.0f,gz_offset=0.0f,ax_offset=0.0f,ay_offset=0.0f,az_offset=0.0f;
+float gx_offset_fin=0.0f,gy_offset_fin=0.0f,gz_offset_fin=0.0f;
 void BSP_Init(void)	//注意初始化的顺序
 {
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
@@ -25,13 +26,11 @@ void BSP_Init(void)	//注意初始化的顺序
 		USB_TaskInit();
 	#endif
 	USART6_Configuration(115200); 
+	UART8_Init();
+	
 	USART6_DMA_Init();
 	USART2_DMA_Init();
 	USART3_DMA_Init();
-	
-	#ifdef tiaocan
-	UART8_Init();
-	#endif
 	
 	
 	TIM9_Init(); //duoji
@@ -45,7 +44,17 @@ void BSP_Init(void)	//注意初始化的顺序
 	TIM6_Init();
 
 	Laser_Configuration();
-	
+	for (int i=0;i<1500;i++)
+	{			
+		MPU6500_Read();
+		gx_offset+=mpu6500_real_data.Gyro_X;
+		gy_offset+=mpu6500_real_data.Gyro_Y;
+		gz_offset+=mpu6500_real_data.Gyro_Z;
+	}
+	gx_offset_fin=gx_offset/1500;
+	gy_offset_fin=gy_offset/1500;
+	gz_offset_fin=gz_offset/1500;	
+	Buzzer_toggle();	
 	
 }
 

@@ -226,7 +226,7 @@ void ItoE(void)
 	  RC_Ex_Ctl.rc.s2  = RC_Ctl.rc.s2;
 
 		RC_Ex_Ctl.mouse.x = RC_Ctl.mouse.x>RC_MOUSE_X_MAX? RC_MOUSE_X_MAX : (RC_Ctl.mouse.x< -RC_MOUSE_X_MAX ? -RC_MOUSE_X_MAX : RC_Ctl.mouse.x);
-		RC_Ex_Ctl.mouse.y = RC_Ctl.mouse.y>RC_MOUSE_Y_MAX? RC_MOUSE_Y_MAX : (RC_Ctl.mouse.y< -RC_MOUSE_Y_MAX ? -RC_MOUSE_Y_MAX : RC_Ctl.mouse.y);;
+		RC_Ex_Ctl.mouse.y = -(RC_Ctl.mouse.y>RC_MOUSE_Y_MAX? RC_MOUSE_Y_MAX : (RC_Ctl.mouse.y< -RC_MOUSE_Y_MAX ? -RC_MOUSE_Y_MAX : RC_Ctl.mouse.y));
 		RC_Ex_Ctl.mouse.press_l = RC_Ctl.mouse.press_l;
 	  RC_Ex_Ctl.mouse.press_r = RC_Ctl.mouse.press_r;
 	  RC_Ex_Ctl.key.v = RC_Ctl.key.v;

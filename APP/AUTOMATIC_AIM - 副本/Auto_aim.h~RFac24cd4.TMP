@@ -1,0 +1,11 @@
+#ifndef __AutoAim
+#define __AutoAim	
+#include "main.h"
+
+void Auto_aim(u8 *rx_buf,int len);
+
+extern float view_ch2;
+extern float view_ch3;
+extern uint32_t last_time_tick_1ms,last_last_time_tick_1ms;
+
+#endif

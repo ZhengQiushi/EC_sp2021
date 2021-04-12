@@ -2,9 +2,15 @@
 #include "spi.h"
 #include "main.h"
 #define ACCEL_SEN 16384.0f
-#define GYRO_SEN 1880.0f// 938.8032f
+#define GYRO_SEN 1880.0f
 #define MAG_SEN 0.3f
 #define	WHO_AM_I			0x75	//只读  默认读出应该是 MPU6050_ID = 0x68
+#define offset_zero_gx 0.070567194666f
+#define offset_zero_gy -0.010879955266f
+#define offset_zero_gz 0.0012549688f
+#define offset_zero_ax -0.11633215333f
+#define offset_zero_ay 0.0343029378f
+#define offset_zero_az -0.076680506666f
 MPU6500_RAW_DATA mpu6500_raw_data;
 MPU6500_REAL_DATA mpu6500_real_data;
 //static const float GYRO_SEN=1880.0f;
@@ -79,94 +85,32 @@ void MPU6500_Read(void){
 	mpu6500_real_data.Gyro_Z=mpu6500_raw_data.Gyro_Z/GYRO_SEN-offset_z;//
 	
 #else 
-
-	unsigned char buf[14];
-	float oldax=mpu6500_raw_data.Accel_X;
-	float olday=mpu6500_raw_data.Accel_Y;
-	float oldaz=mpu6500_raw_data.Accel_Z;
-	float oldgx=mpu6500_raw_data.Gyro_X;
-	float oldgy=mpu6500_raw_data.Gyro_Y;
-	float oldgz=mpu6500_raw_data.Gyro_Z;
-	MPU6500ReadSPI(ACCEL_XOUT_H,buf,14);
-	
-	float newax=(short)((buf[0])<<8) | buf[1];	
-	float neway=(short)((buf[2])<<8 )| buf[3];
-	float newaz=(short)((buf[4])<<8 )| buf[5];
-	float newgx=(short)((buf[8])<<8 )| buf[9];//01	
-	float newgy=(short)((buf[10])<<8 )| buf[11];//23	
-	float newgz=(short)((buf[12])<<8 )| buf[13];//45
-
-	if (fabs(oldax-newax)<500)
-		mpu6500_raw_data.Accel_X=oldax;
-	else
-		mpu6500_raw_data.Accel_X=newax;
-	
-	if (fabs(olday-neway)<500)
-		mpu6500_raw_data.Accel_Y=olday;
-	else
-		mpu6500_raw_data.Accel_Y=neway;
-
-	if (fabs(oldaz-newaz)<600)
-		mpu6500_raw_data.Accel_Z=oldaz;
-	else
-		mpu6500_raw_data.Accel_Z=newaz;
-
-	
-	
-	if (fabs(oldgx-newgx)<15)
-		mpu6500_raw_data.Gyro_X=oldgx;
-	else
-		mpu6500_raw_data.Gyro_X=newgx;
-	
-	if (fabs(oldgy-newgy)<15)
-		mpu6500_raw_data.Gyro_Y=oldgy;
-	else
-		mpu6500_raw_data.Gyro_Y=newgy;	
-	
-	if (fabs(oldgz-newgz)<15)
-		mpu6500_raw_data.Gyro_Z=oldgz;
-	else
-		mpu6500_raw_data.Gyro_Z=newgz;
-
-
-  mpu6500_real_data.Accel_X=-mpu6500_raw_data.Accel_X/ACCEL_SEN;
-	mpu6500_real_data.Accel_Y=mpu6500_raw_data.Accel_Y/ACCEL_SEN;
-	mpu6500_real_data.Accel_Z=mpu6500_raw_data.Accel_Z/ACCEL_SEN;	
-	mpu6500_real_data.Gyro_X=-mpu6500_raw_data.Gyro_X/1880.0f-offset_x;
-	mpu6500_real_data.Gyro_Y=mpu6500_raw_data.Gyro_Y/1880.0f-offset_y;
-	mpu6500_real_data.Gyro_Z=mpu6500_raw_data.Gyro_Z/1880.0f-offset_z;   //GYRO_SEN	
-
-
-
-	mpu6500_raw_data.Temp=(short)((buf[6])<<8 )| buf[7];
-	mpu6500_real_data.Temp=mpu6500_raw_data.Temp*1.0;	
-/*
 	unsigned char buf[14];
 	MPU6500ReadSPI(ACCEL_XOUT_H,buf,14);
 	
 	mpu6500_raw_data.Accel_X=(short)((buf[0])<<8) | buf[1];
-	mpu6500_real_data.Accel_X=-mpu6500_raw_data.Accel_X/ACCEL_SEN;
+	mpu6500_real_data.Accel_X=-mpu6500_raw_data.Accel_X/ACCEL_SEN-offset_zero_ax;
 	
 	mpu6500_raw_data.Accel_Y=(short)((buf[2])<<8 )| buf[3];
-	mpu6500_real_data.Accel_Y=mpu6500_raw_data.Accel_Y/ACCEL_SEN;
+	mpu6500_real_data.Accel_Y=mpu6500_raw_data.Accel_Y/ACCEL_SEN-offset_zero_ay;
 	
 	mpu6500_raw_data.Accel_Z=(short)((buf[4])<<8 )| buf[5];
-	mpu6500_real_data.Accel_Z=mpu6500_raw_data.Accel_Z/ACCEL_SEN;
+	mpu6500_real_data.Accel_Z=mpu6500_raw_data.Accel_Z/ACCEL_SEN-offset_zero_az;
 	
 	mpu6500_raw_data.Temp=(short)((buf[6])<<8 )| buf[7];
 	mpu6500_real_data.Temp=mpu6500_raw_data.Temp*1.0;
 	
 	mpu6500_raw_data.Gyro_X=(short)((buf[8])<<8 )| buf[9];//01
-	mpu6500_real_data.Gyro_X=-mpu6500_raw_data.Gyro_X/1880.0f-offset_x;
+	mpu6500_real_data.Gyro_X=-mpu6500_raw_data.Gyro_X/1880.0f-offset_x-offset_zero_gx-gx_offset_fin;
 	
 	
 	mpu6500_raw_data.Gyro_Y=(short)((buf[10])<<8 )| buf[11];//23
-	mpu6500_real_data.Gyro_Y=mpu6500_raw_data.Gyro_Y/1880.0f-offset_y;
+	mpu6500_real_data.Gyro_Y=mpu6500_raw_data.Gyro_Y/1880.0f-offset_y-offset_zero_gy-gy_offset_fin;
 	
 	
 	mpu6500_raw_data.Gyro_Z=(short)((buf[12])<<8 )| buf[13];//45
-	mpu6500_real_data.Gyro_Z=mpu6500_raw_data.Gyro_Z/1880.0f-offset_z;   //GYRO_SEN
-	*/
+	mpu6500_real_data.Gyro_Z=mpu6500_raw_data.Gyro_Z/1880.0f-offset_z-offset_zero_gz-gz_offset_fin;   //GYRO_SEN
+	
 #endif
 }
 //void MPU6500_ReadACCEL(void){

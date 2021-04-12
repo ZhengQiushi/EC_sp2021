@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-void FeedJudge();
+void FeedJudge(void);
 void PidFeedInit(void);
 void FeedControlLoop(void);
 void FeedControlInit(void);

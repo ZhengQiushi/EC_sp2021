@@ -217,7 +217,7 @@ void Auto_aim(frame fram,int len)
 //				PitchTarget.Mechanical-=fram.pitch*22.75f;
 //            auto_aim_yaw=YawTarget.Gyroscope-fram.yaw;
 //            auto_aim_pit=PitchTarget.Mechanical-fram.pitch*22.75f;
-						temp_yaw_target_p=0.0124f+0.015f*(1-abs(fram.yaw)/5.0f);
+						temp_yaw_target_p=0.0124f+0.015f*(1-fram.yaw/5.0f);		//?
 						if(temp_yaw_target_p<0.01f)
 							temp_yaw_target_p=0.01f;
 						PID_SetGains(&auto_yaw,temp_yaw_target_p,0,0);

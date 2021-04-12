@@ -309,10 +309,10 @@ void ext_game_robot_state_interpret(uint8_t * ext_game_robot_state_Message)
 	memcpy((uint8_t*)&ext_game_robot_state.robot_level,ext_game_robot_state_Message+1,1);
 	memcpy((uint8_t*)&ext_game_robot_state.remain_HP,ext_game_robot_state_Message+2,2);
 	memcpy((uint8_t*)&ext_game_robot_state.max_HP,ext_game_robot_state_Message+4,2);
-	memcpy((uint8_t*)&ext_game_robot_state.shooter_heat0_cooling_rate,ext_game_robot_state_Message+6,2);
-	memcpy((uint8_t*)&ext_game_robot_state.shooter_heat0_cooling_limit,ext_game_robot_state_Message+8,2);
-	memcpy((uint8_t*)&ext_game_robot_state.shooter_heat1_cooling_rate,ext_game_robot_state_Message+10,2);
-	memcpy((uint8_t*)&ext_game_robot_state.shooter_heat1_cooling_limit,ext_game_robot_state_Message+12,2);
+	memcpy((uint8_t*)&ext_game_robot_state.shooter_heat0_cooling_rate,ext_game_robot_state_Message+6,2);//17mm枪口每秒冷却值
+	memcpy((uint8_t*)&ext_game_robot_state.shooter_heat0_cooling_limit,ext_game_robot_state_Message+8,2);//17mm热量上限
+	memcpy((uint8_t*)&ext_game_robot_state.shooter_heat1_cooling_rate,ext_game_robot_state_Message+10,2);//42mm冷却
+	memcpy((uint8_t*)&ext_game_robot_state.shooter_heat1_cooling_limit,ext_game_robot_state_Message+12,2);//42mm热量上限
 	
 	uint8_t a;
 	memcpy(&a,ext_game_robot_state_Message+14,1);/////////////////
@@ -337,7 +337,6 @@ memcpy((uint8_t*)&ext_power_heat_data.chassis_power_buffer,(ext_power_heat_data_
 	memcpy((uint8_t*)&ext_power_heat_data.shooter_heat0,ext_power_heat_data_Message+10,2);
 	memcpy((uint8_t*)&ext_power_heat_data.shooter_heat1,ext_power_heat_data_Message+12,2);
 	
-//	UART_DMA_SEND(ext_power_heat_data.chassis_power);
 }
 
 

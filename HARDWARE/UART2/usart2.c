@@ -10,7 +10,7 @@ u8 update_flag=0;;
 uint16_t Auto_Error_Count = 0;
 
 frame sendtoCom_frame;
-u8 sendbuffer[15];
+u8 sendbuffer[19];
 
 void USART2_DMA_Init()
 {
@@ -87,7 +87,7 @@ void USART2_DMA_Init()
 	dma2.DMA_PeripheralBaseAddr = (uint32_t)&(USART2->DR);
 	dma2.DMA_Memory0BaseAddr = (uint32_t)sendbuffer;   
 	dma2.DMA_DIR = DMA_DIR_MemoryToPeripheral;
-	dma2.DMA_BufferSize = 15;       
+	dma2.DMA_BufferSize = 19;       
 	dma2.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	dma2.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	dma2.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
@@ -177,8 +177,8 @@ void USART2_IRQHandler(void)
 //		else
 //			Auto_Error_Count ++;
 		update_flag= Auto_Frame_Large_Unpack();
-		DMA_SetCurrDataCounter(DMA1_Stream5,AUTO_FRAME_LENGTH);  //璁剧疆浼犺緭鏁版嵁闀垮害
-    DMA_Cmd(DMA1_Stream5,ENABLE);  //鎵撳紑DMA
+		DMA_SetCurrDataCounter(DMA1_Stream5,AUTO_FRAME_LENGTH);  //设置传输数据长度
+    DMA_Cmd(DMA1_Stream5,ENABLE);  //打开DMA
 		
 	}
 }
@@ -225,8 +225,10 @@ void sendtoComputer(int timestamp_doing, int auto_aim, int big_buff,int entering
 	sendtoCom_frame.end=0xf2;
 	
 	sendtoCom_frame.timestamp = timestamp_doing;
-	sendtoCom_frame.yaw = Yaw;
-	sendtoCom_frame.pitch = Pitch;
+	sendtoCom_frame.yaw = 0;
+	sendtoCom_frame.pitch = Pitch_m;
+	sendtoCom_frame.speed = 10;
+	
 	if(auto_aim == 1)
 		sendtoCom_frame.extra[0] = 0x11;
 	if(big_buff == 1)
@@ -235,25 +237,23 @@ void sendtoComputer(int timestamp_doing, int auto_aim, int big_buff,int entering
 		sendtoCom_frame.extra[0] = 0x22;// Clockwise
 	if(big_buff == 3)
 		sendtoCom_frame.extra[0] = 0x23;// Counterclockwise
-
 	if(entering_auto_aim==1)
 		sendtoCom_frame.extra[1] = 0x01;
 	else
 		sendtoCom_frame.extra[1] = 0x00;
 	
-	packFrame(sendbuffer,&sendtoCom_frame);//鍑忓皯姣忔鎼繍鍐呭瓨鏃堕棿
+	packFrame(sendbuffer,&sendtoCom_frame);//减少每次搬运内存时间
 //  DMA_Cmd(DMA1_Stream6,ENABLE);
 //	USART_DMACmd(USART2, USART_DMAReq_Tx, ENABLE);
 	//DMA_Cmd(DMA1_Stream6,DISABLE);
 	
 	
 	
- 
+	 
       
     while (DMA_GetCmdStatus(DMA1_Stream6) != DISABLE){}  //waiting for the completion of last transmission 
-	
-    DMA_Cmd(DMA1_Stream6, DISABLE);                      //ready to restart 
-    DMA_SetCurrDataCounter(DMA1_Stream6,15);          	 //load the corresponding bits for fram
+    DMA_Cmd(DMA1_Stream6, DISABLE);                      //ready to restart       
+    DMA_SetCurrDataCounter(DMA1_Stream6,19);          //load the corresponding bits for fram   
 		
-    DMA_Cmd(DMA1_Stream6, ENABLE);     			 // strat to transmit
+    DMA_Cmd(DMA1_Stream6, ENABLE);     								//strat to transmit
 }

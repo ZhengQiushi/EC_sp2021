@@ -17,7 +17,7 @@ void keyboardmove(uint16_t keyboardvalue,uint16_t xlimit,uint16_t ylimit);
 void CM_Switch_Moni(void);
 void CM_Normal_PID(void);
 void CM_Climb_PID(void);
-
+void CM_Normal_PID1(void);//¼ìÂ¼ÓÃpÆ«Ð¡
 
 extern float speed_limite;
 extern u8 quick_spin_flag;
@@ -29,5 +29,5 @@ extern float lec_numB;
 extern float lec_numC;
 extern float lec_numD;
 extern int16_t speedA_final,speedB_final,speedC_final,speedD_final;
-extern float lookfollow;
+
 #endif

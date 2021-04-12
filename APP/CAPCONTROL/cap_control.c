@@ -1,7 +1,7 @@
 #include "main.h"
 
 
-int32_t Power_Limitation_Num=110000;
+int32_t Power_Limitation_Num=60000;
 int32_t Residue_Power;
 
 int8_t CAN2_Cap_flag=0;
@@ -15,6 +15,8 @@ int32_t Cap_Toutuous_Up=24000;
 int32_t Cap_Toutuous_Down=20000;
 
 int32_t Chassis_Power=0;
+
+
 
 void CapContorl(void)
 {
@@ -71,7 +73,9 @@ else
 #ifdef Referee_System
 
 	Chassis_Power=ext_power_heat_data.chassis_power*1000;		
+	//Power_Limitation_Num = Power_based_on_level();
 	
+		
 		
 #else
 	if(Lost_Connection_Count<100)
