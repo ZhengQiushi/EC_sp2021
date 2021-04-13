@@ -24,6 +24,7 @@
 #include "usart2.h"
 #include "usart3.h"
 #include "usart6.h"
+#include "uart8.h"
 //#include "jy901_usart.h"
 #include "laser.h"
 #include "mpu6500.h"
@@ -40,7 +41,8 @@
 #include "GimbalControl.h"
 #include "Auto_aim.h"
 #include "SendCom.h"
-#include "uart8.h"
+
+
 
 #define Referee_System //接入裁判系统时开启
 
@@ -60,7 +62,7 @@
 //#define USING_USB
 
 //#define SUPER_CAPACITOR
-//#define Power_Limitation
+#define Power_Limitation
 //#define Cap_Offline_Debug
 
 #define hengfang
@@ -71,7 +73,6 @@
 #define GYRO_X_OFFSET 0//0.0390f  
 #define GYRO_Y_OFFSET 0//0.05412f
 #define GYRO_Z_OFFSET 0//-0.037880f
-#define tiaocan
 
 
 
@@ -80,7 +81,7 @@
 #ifdef INFANTRY_Jiangsu
 
 #define MIDDLE_YAW 	7668 //2000 
-#define MIDDLE_PITCH  1805 //4930
+#define MIDDLE_PITCH  2083 //4930
 
 #define MOUSE_YAW_SPEED 0.03 //0.0024
 #define MOUSE_PIT_SPEED 1.2    //0.1
@@ -89,7 +90,7 @@
 #define YLIMIT_OFFSET 500
 #define gears_speedXYZ 	18
 #define gears_speedRAD 	15
-#define followVal_limit 27
+#define followVal_limit 5
 
 #define COVER_OPEN 1700
 #define COVER_CLOSE 1000

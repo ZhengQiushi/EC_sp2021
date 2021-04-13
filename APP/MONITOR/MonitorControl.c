@@ -17,6 +17,7 @@
 
 int16_t rc_monitor_time = 0; //遥控器监控计时
 float max_output_current=0;
+static int u8count3 = 0;
 
 extern double zf_result;
 
@@ -26,12 +27,79 @@ u8 AdcReceiveMonitor()     //待写
 }
 
 
+
+/*----------------------------------------------------
+控制电流范围		：-16384 ~ 16384	1
+转矩电流范围		：-20		 ~ 20			A
+底盘功率上限		：60W
+计算						：Im = 60/24 = 2.5A
+									Ic = 2.5x(16384/20) ≈ 2048
+衰减阶梯值			: 500
+
+等级制					：60W --- 2048/1200
+									70W --- 4096/3000
+									80W ---
+-------------------------------------------------------*/
+
+
 void Power_Moni(void)
 {
-	max_output_current=30000-10000*((float)Chassis_Power/(float)Power_Limitation_Num);//空转测电流以确定参数
+	//max_output_current=5000-500*((float)Chassis_Power/(float)Power_Limitation_Num);//空转测电流以确定参数
+	
 #ifdef Referee_System
+	
 	max_output_current=max_output_current*ext_power_heat_data.chassis_power_buffer/60.0f;
+	
+//	u8count3++;
+//	if(u8count3 == 50){
+//		u8count3 = 0 ;
+//		UART_DMA_SEND(ext_power_heat_data.chassis_power);
+//					}
+	
 #endif
+}
+
+/*----------------------------------------------------
+根据等级设置功率上限制
+
+等级制					：level 1 ---- 60W 
+									level 1 ---- 80W 
+									level 1 ---- 100W 
+-------------------------------------------------------*/
+int Power_based_on_level(void){
+	int a,b;
+	a = ext_game_robot_state.robot_level;
+	switch(a){
+		case 1: b = 60000;break;
+		case 2: b = 80000;break;
+		case 3: b = 100000;break;
+
+	}
+	return b;
+}
+
+int max_output_speed_based_on_level(void){
+	int a,b;
+	a = ext_game_robot_state.robot_level;
+	switch(a){
+		case 1: b = 5400;break;
+		case 2: b = 6400;break;
+		case 3: b = 7000;break;
+
+	}
+	return b;
+}
+
+float heat_based_on_level(void){
+	int a,b;
+	a = ext_game_robot_state.robot_level;
+	switch(a){
+		case 1: b = 150;break;
+		case 2: b = 280;break;
+		case 3: b = 400;break;
+
+	}
+	return b;
 }
 
 

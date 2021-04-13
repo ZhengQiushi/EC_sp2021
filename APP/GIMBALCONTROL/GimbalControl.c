@@ -21,15 +21,15 @@ float Yaw_Normal_sp=16.0;		//16
 float Yaw_Normal_si=0.8;
 float Yaw_Normal_sd=10;
 */
-float Yaw_Normal_pp=75.0;
+float Yaw_Normal_pp=50.0;//75.0 50
 float Yaw_Normal_pi=2;
 float Yaw_Normal_pd=0.8;
 float Yaw_Normal_sp=16.0;
 float Yaw_Normal_si=0.8;
 float Yaw_Normal_sd=0.85;
 
-float Pitch_Normal_pp=160;//150																											//position p i d :160 50 4.2 good
-float Pitch_Normal_pi=50;//56.5;//20
+float Pitch_Normal_pp=120;//150	160																										//position p i d :160 50 4.2 good
+float Pitch_Normal_pi=50;//56.5;//20//50
 float Pitch_Normal_pd=4.25;//4.65;//4.5//200 54 4.4 for small angle
 float Pitch_Normal_sp=2.5;
 float Pitch_Normal_si=0;//0.0;
@@ -115,6 +115,7 @@ int switch_mode_delay_init=500;
 float Compensation_spin=0;
 bool put_x_flag=0;
 int x_loop=560;
+void CAN2_Cmd_All(int16_t current_205,int16_t current_206);
 
 void GimbalControlInit(void)
 {
@@ -377,12 +378,12 @@ void TargetCacul(void)
             if((RC_Ex_Ctl.key.v & KEY_PRESSED_OFFSET_Q )==KEY_PRESSED_OFFSET_Q )
             {
 							if(fabs(position_yaw_relative)<200)
-						//		YawTarget.Gyroscope+=0.09f;
-							    YawTarget.Gyroscope+=0.9f;
+						//		YawTarget.Gyroscope+=0.9f;
+							    YawTarget.Gyroscope+=0.6f;
 							else
-                YawTarget.Gyroscope+=1.8f;
+                YawTarget.Gyroscope+=1.2f;
 							if(climb_mode_flag!=1)
-                Compensation_spin=-700;
+                Compensation_spin=-700;//700
 							else
 								Compensation_spin=0;
             }
@@ -402,9 +403,9 @@ void TargetCacul(void)
             else if((RC_Ex_Ctl.key.v & KEY_PRESSED_OFFSET_E )==KEY_PRESSED_OFFSET_E)
             {
 							if(fabs(position_yaw_relative)<200)
-								YawTarget.Gyroscope-=0.9f;
+								YawTarget.Gyroscope-=0.6f;
 							else
-                YawTarget.Gyroscope-=1.8f;
+                YawTarget.Gyroscope-=1.2f;
                 
 							if(climb_mode_flag!=1)
                 Compensation_spin=700;
@@ -596,6 +597,7 @@ float YawPID_Gyro(float SetPosition)
     float NowPosition=Yaw*57.3f;
     angle_in_degree=NowPosition;
     float NowSpeed=delay_speed;
+
     SetPosition = SetPosition*22.756f;//8192/360.0f;
     NowPosition = NowPosition*22.756f;//8192/360.0f;
     if(fabs(SetPosition-NowPosition)<50)

@@ -24,6 +24,8 @@ int shoot_speed_change_flag_count=0;
 int speed_switch_flag=0;
 int speed_switch_flag_count=0;
 
+
+
 void FrictionControlInit(void)
 {
 	PidFrictionInit();	
@@ -81,8 +83,8 @@ void FrictionControlLoop(void)
     else if(frictionState == Friction_ON)
       {
 				if (speed_level==0)Friction_speed_target_l=0;
-        else if(speed_level==1)Friction_speed_target_l=6300;
-        else if(speed_level==2)Friction_speed_target_l=6300;
+        else if(speed_level==1)Friction_speed_target_l=4000;
+        else if(speed_level==2)Friction_speed_target_l=4000;
       }
 	}	
   else if ((remoteState == PREPARE_STATE)||(remoteState == STANDBY_STATE) ||(remoteState == ERROR_STATE))
@@ -97,7 +99,9 @@ void FrictionControlLoop(void)
 
 		PIDOut_friction_l=PID_ControllerDriver(&FrictionPID_l, Friction_speed_target_l, current_fric_s_201);
 		PIDOut_friction_r=PID_ControllerDriver(&FrictionPID_r, Friction_speed_target_r, current_fric_s_202);
-
+		
+	
+	
 		CAN1_fri_Cmd(PIDOut_friction_l,PIDOut_friction_r);
 
 

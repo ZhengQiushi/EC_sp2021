@@ -286,7 +286,7 @@ u8 CAN2_Mode_Init(u8 tsjw,u8 tbs2,u8 tbs1,u16 brp,u8 mode)
 }   
 
 
-static int times = 0;
+static int u8count1 = 0; 
 void CAN2_RX0_IRQHandler(void)
 {   
 	CanRxMsg rx_message;
@@ -314,14 +314,12 @@ void CAN2_RX0_IRQHandler(void)
         { 
              current_cm_201 = (rx_message.Data[2]<<8) | rx_message.Data[3];	
 					t_i_1=(rx_message.Data[4]<<8) | rx_message.Data[5];
-			
-			times++;
-			if ( times == 50 )
-			{
-				times = 0;
-				UART_DMA_SEND(current_cm_201);	
-			}			
-			
+					
+//					u8count1++;
+//					if(u8count1 == 50){
+//						u8count1 = 0 ;
+//						UART_DMA_SEND(current_cm_201);
+//					}
         }
 				else if(rx_message.StdId == 0x202)       //срг╟         
         { 

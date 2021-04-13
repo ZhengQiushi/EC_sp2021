@@ -14,9 +14,7 @@ int16_t CMFollowVal=0; 			    //底盘跟随值
 int16_t speedA_final,speedB_final,speedC_final,speedD_final;
 //PID_Struct CMPid,CMFollowPid,CMFollowPid_speed;                 //底盘运动pid、跟随pid
 float step=100,keymove_x=0,keymove_y=0,m=0,n=0,q=0;           //step-速度变化率  x-x轴方向变化值 y-y速度变化值;
-float lookfollow;
-
-
+float followwatch;
 
 u8 quick_spin_flag=0;
 int16_t CMFollowVal_QUICK=0;
@@ -25,7 +23,9 @@ int16_t CMFollowVal_QUICK=0;
 PID_Type SPFOLLOW,SPCHIASSISA,SPCHIASSISB,SPCHIASSISC,SPCHIASSISD,SPFOLLOW_SPEED;
 
 
-float max_output_speed=7500;
+float max_output_speed=5500;//60W 缓冲能量20j左右
+//float max_output_speed=6500;//80W 缓冲能量20J
+//float max_output_speed=7000;//100W 缓冲能量30J
 
 float singl_max=4000;
 float speed_step=500;
@@ -36,9 +36,10 @@ float spin_x=0;
 
 u8 climb_mode_flag=0;
 
+float cm_normal_p1=0.9;//检录用0.9;
 
-float cm_normal_p=8.0;
-float cm_normal_i=4.2;
+float cm_normal_p=5.0;//8.0;
+float cm_normal_i=3.2;//5.2
 float cm_normal_d=0;
 
 float cm_climb_p=8.5;
@@ -70,6 +71,7 @@ void CMControlLoop(void)
     else if(remoteState == NORMAL_REMOTE_STATE)
     {
         CMFollowVal = followValCal(0);
+			  CM_Normal_PID1();
         move(RC_Ex_Ctl.rc.ch0,RC_Ex_Ctl.rc.ch1,CMFollowVal/*0.5f*(RC_Ex_Ctl.rc.ch2)*/);
     }
     else if(remoteState == STANDBY_STATE )
@@ -128,8 +130,8 @@ void CMControlLoop(void)
                     &&(RC_Ex_Ctl.key.v & KEY_PRESSED_OFFSET_S )!=KEY_PRESSED_OFFSET_S
                     &&(RC_Ex_Ctl.key.v & KEY_PRESSED_OFFSET_D )!=KEY_PRESSED_OFFSET_D)
             {
-								rotate_change_para=sin(rotate_counter_100ms);//变速
-                CMFollowVal=(rotate_speed+300/**fabs(rotate_change_para)*/)*rotate_speed_dir;
+								rotate_change_para=sin(rotate_counter_100ms);//变速 
+                CMFollowVal=(rotate_speed+20/**fabs(rotate_change_para)*/)*rotate_speed_dir;//常数300改为55
                 key_move(keymove_x,keymove_y,CMFollowVal);
             }
             //小陀螺旋转移动档
@@ -192,7 +194,7 @@ void CMControlLoop(void)
                     &&(RC_Ex_Ctl.key.v & KEY_PRESSED_OFFSET_S )!=KEY_PRESSED_OFFSET_S
                     &&(RC_Ex_Ctl.key.v & KEY_PRESSED_OFFSET_D )!=KEY_PRESSED_OFFSET_D)
             {
-                CMFollowVal=(rotate_speed+300)*rotate_speed_dir;
+                CMFollowVal=(rotate_speed+55)*rotate_speed_dir;
                 key_move(keymove_x,keymove_y,CMFollowVal);
             }
             //小陀螺旋转移动档
@@ -239,7 +241,6 @@ void CMStop(void)
 ****************************************************************************************/
 void move(int16_t speedX, int16_t speedY, int16_t rad)
 {
-    float max_speed=0;
     speedX *= gears_speedXYZ;
     speedY *= gears_speedXYZ;
     rad *= gears_speedRAD;
@@ -255,22 +256,6 @@ void move(int16_t speedX, int16_t speedY, int16_t rad)
     int16_t speedC = (-speedX - speedY + rad);
     int16_t speedD = (-speedX + speedY + rad);
 
-    if(fabs(speedA)>max_speed)
-        max_speed=fabs(speedA);
-    if(fabs(speedB)>max_speed)
-        max_speed=fabs(speedB);
-    if(fabs(speedC)>max_speed)
-        max_speed=fabs(speedC);
-    if(fabs(speedD)>max_speed)
-        max_speed=fabs(speedD);
-
-    if(max_speed>max_output_speed)
-    {
-        speedA*=max_output_speed/max_speed;
-        speedB*=max_output_speed/max_speed;
-        speedC*=max_output_speed/max_speed;
-        speedD*=max_output_speed/max_speed;
-    }
 
     CMControlOut(speedA,speedB,speedC,speedD);
 }
@@ -281,32 +266,17 @@ void key_move(int16_t speedX, int16_t speedY, int16_t rad)
     float max_speed=0;
     rad *= gears_speedRAD;
 
-    if(fabs(speedY)>5000&&fabs(rad)<50&&fabs(rad)>5)
+    if(abs(speedY)>5000&&abs(rad)<50&&abs(rad)>5)
     {
         rad*=10;
     }
+		
     int16_t speedA = ( speedX + speedY + rad);
     int16_t speedB = ( speedX - speedY + rad);
     int16_t speedC = (-speedX - speedY+ rad);
     int16_t speedD = (-speedX + speedY + rad);
 
-    if(fabs(speedA)>max_speed)
-        max_speed=fabs(speedA);
-    if(fabs(speedB)>max_speed)
-        max_speed=fabs(speedB);
-    if(fabs(speedC)>max_speed)
-        max_speed=fabs(speedC);
-    if(fabs(speedD)>max_speed)
-        max_speed=fabs(speedD);
-
-    if(max_speed>max_output_speed)
-    {
-        speedA*=max_output_speed/max_speed;
-        speedB*=max_output_speed/max_speed;
-        speedC*=max_output_speed/max_speed;
-        speedD*=max_output_speed/max_speed;
-    }
-
+    
     CMControlOut(speedA,speedB,speedC,speedD);
 }
 
@@ -324,20 +294,48 @@ float lec_numA=3000;
 float lec_numB=3000;
 float lec_numC=3000;
 float lec_numD=3000;
+static int u8count2 = 0;
+
+float speda1 = 0;
+float speda2 = 0;
+
+
 
 int16_t pre_current_A=0;
 int16_t pre_current_B=0;
 int16_t pre_current_C=0;
 int16_t pre_current_D=0;
-int16_t current_step=600;//80;
+int16_t current_step =800;//600;
 u8 super_cap_flag=0;
+float w_danger=45;
 void CMControlOut(int16_t spa , int16_t spb ,int16_t spc ,int16_t spd )
 {
 
+		float max_speed=0;
     float current_sum=0;
     int max_now_speed=0;
-		int k=1;
+		float k=0.1;
+		max_output_speed= max_output_speed_based_on_level();//根据等级变化上限 测好参数后记得使用
+/* --------------SPEED CTRL---------------*/
+	if(abs(spa)>max_speed)
+        max_speed=abs(spa);
+    if(abs(spb)>max_speed)
+        max_speed=abs(spb);
+    if(abs(spc)>max_speed)
+        max_speed=abs(spc);
+    if(abs(spd)>max_speed)
+        max_speed=abs(spd);
 
+    if(max_speed>max_output_speed)
+    {
+        spa*=max_output_speed/max_speed;
+        spb*=max_output_speed/max_speed;
+        spc*=max_output_speed/max_speed;
+        spd*=max_output_speed/max_speed;
+    }
+/* --------------SPEED CTRL---------------*/
+
+		
     float speedA = PID_ControllerDriver(&SPCHIASSISA,spa,current_cm_201);
     float speedB = PID_ControllerDriver(&SPCHIASSISB,spb,current_cm_202);
     float speedC = PID_ControllerDriver(&SPCHIASSISC,spc,current_cm_203);
@@ -351,80 +349,81 @@ void CMControlOut(int16_t spa , int16_t spb ,int16_t spc ,int16_t spd )
 //    }
 //    else
 	
-#ifdef Power_Limitation
-    if(Chassis_Power < Power_Limitation_Num)//检测有无超功率	
-	{
-		Residue_Power=Power_Limitation_Num-Chassis_Power;
-		if(Residue_Power>5000)Residue_Power-=5000;
-		Residue_Power/=25;
-		CAN2_Cmd_Bottom(speedA,speedB,speedC,speedD);
-	}
-	else	//超功率要给电机限速
-    {
-		Residue_Power=0;
-	}
-		
-        if(abs(current_cm_201)>max_now_speed)
-            max_now_speed=abs(current_cm_201);
-        if(abs(current_cm_202)>max_now_speed)
-            max_now_speed=abs(current_cm_202);
-        if(abs(current_cm_203)>max_now_speed)
-            max_now_speed=abs(current_cm_203);
-        if(abs(current_cm_204)>max_now_speed)
-            max_now_speed=abs(current_cm_204);
-
-
-        if(abs(speedA-pre_current_A)>current_step)
+/* --------------control the step of valicity---------------*/
+			
+        if(fabs(speedA-pre_current_A)>current_step)
         {
             if(speedA-pre_current_A>current_step)
                 speedA=pre_current_A+current_step;
             else if(speedA-pre_current_A<-current_step)
                 speedA=pre_current_A-current_step;
         }
-
-        if(abs(speedB-pre_current_B)>current_step)
+        if(fabs(speedB-pre_current_B)>current_step)
         {
             if(speedB-pre_current_B>current_step)
                 speedB=pre_current_B+current_step;
             else if(speedB-pre_current_B<-current_step)
                 speedB=pre_current_B-current_step;
         }
-        if(abs(speedC-pre_current_C)>current_step)
+        if(fabs(speedC-pre_current_C)>current_step)
         {
             if(speedC-pre_current_C>current_step)
                 speedC=pre_current_C+current_step;
             else if(speedC-pre_current_C<-current_step)
                 speedC=pre_current_C-current_step;
         }
-        if(abs(speedD-pre_current_D)>current_step)
+        if(fabs(speedD-pre_current_D)>current_step)
         {
             if(speedD-pre_current_D>current_step)
                 speedD=pre_current_D+current_step;
             else if(speedD-pre_current_D<-current_step)
                 speedD=pre_current_D-current_step;
         }
-        current_sum=fabs(speedA)+fabs(speedB)+fabs(speedC)+fabs(speedD);
-		
+				
+				
+	
+/* --------------control the step of valicity---------------*/
 
+#ifdef Power_Limitation
+		Chassis_Power=ext_power_heat_data.chassis_power*1000;
+				
+//根据危险值设置动态Power_Limitation_Num
+//		if(ext_power_heat_data.chassis_power_buffer > w_danger)
+//			//Power_Limitation_Num = 60000+((ext_power_heat_data.chassis_power_buffer - w_danger)/0.01)*1000;		//0.01是功率探测周期，裁判系统
+//		Power_Limitation_Num = Power_based_on_level()+((ext_power_heat_data.chassis_power_buffer - w_danger)/0.01)*1000;//根据等级变化上限 测好参数后记得使用
+//	 else
+//		 //Power_Limitation_Num = 60000;
+			Power_Limitation_Num = Power_based_on_level();//根据等级变化上限 测好参数后记得使用
+    if(Chassis_Power < Power_Limitation_Num)//检测有无超功率	
+	{
+		Residue_Power=Power_Limitation_Num-Chassis_Power;
+		if(Residue_Power>5000)Residue_Power-=5000;
+		Residue_Power/=25;
+			
+		CAN2_Cmd_Bottom(speedA,speedB,speedC,speedD);
+	}
+	
+	else	//超功率要给电机限速
+    {
+		Residue_Power=0;        
 
-
-		if(current_sum > max_output_current)
-        {
-            speedA*=k*(max_output_current)/current_sum;
-            speedB*=k*(max_output_current)/current_sum;
-            speedC*=k*(max_output_current)/current_sum;
-            speedD*=k*(max_output_current)/current_sum;
-        }
+				
+				
 		if(Chassis_Power > Power_Limitation_Num)
         {
-						speedA*=k*(Power_Limitation_Num)/Chassis_Power;
-            speedB*=k*(Power_Limitation_Num)/Chassis_Power;
-            speedC*=k*(Power_Limitation_Num)/Chassis_Power;
-            speedD*=k*(Power_Limitation_Num)/Chassis_Power;
+						speedA*=k*(float)Power_Limitation_Num/((float)Chassis_Power);
+            speedB*=k*(float)Power_Limitation_Num/((float)Chassis_Power);
+            speedC*=k*(float)Power_Limitation_Num/((float)Chassis_Power);
+            speedD*=k*(float)Power_Limitation_Num/((float)Chassis_Power);
         }
 		
+				
+				
+				
+				
         CAN2_Cmd_Bottom(speedA,speedB,speedC,speedD);
-	//}
+	}
+		
 #else 
 	  Residue_Power=Power_Limitation_Num-Chassis_Power;
 
@@ -432,7 +431,15 @@ void CMControlOut(int16_t spa , int16_t spb ,int16_t spc ,int16_t spd )
 		Residue_Power/=25;
 		CAN2_Cmd_Bottom(speedA,speedB,speedC,speedD);
 #endif
-    output_current_sum=abs(speedA)+abs(speedB)+abs(speedC)+abs(speedD);
+	u8count2++;
+				
+    output_current_sum=fabs(speedA)+fabs(speedB)+fabs(speedC)+fabs(speedD);
+	if(u8count2 == 10){
+					u8count2 = 0 ;
+					UART_DMA_SEND(ext_power_heat_data.chassis_power_buffer);
+					//ext_power_heat_data.chassis_power_buffer;
+					}
+
     pre_current_A=speedA;
     pre_current_B=speedB;
     pre_current_C=speedC;
@@ -460,14 +467,17 @@ int16_t followValCal(float Setposition)
 {
     int16_t followVal = 0;
     float NowPosition = position_yaw_relative;
+
     followVal=PID_ControllerDriver(&SPFOLLOW,Setposition,NowPosition);
 //	float followVal_speed=PID_ControllerDriver(&SPFOLLOW_SPEED,followVal/20.0,yaw_speed);
 //	followVal = CMSpeedLegalize(followVal_speed,1200);
     //跟随量最小值，角度过小不跟随
-    if(abs(followVal) < followVal_limit) followVal = 0;
-lookfollow=followVal;
+		followwatch=followVal;
+    if(abs(followVal) < followVal_limit) 
+			followVal = 0;
+		if (fabs(NowPosition)<10)
+			followVal = 0;
     return followVal;
-	 //   return 0;
 }
 
 
@@ -481,15 +491,25 @@ void CMControlInit(void)
 {
     PID_ControllerInit(&SPFOLLOW,50,150,1100,0.01);
     SPFOLLOW.intergration_separation = 100;
-
-    PID_ControllerInit(&SPCHIASSISA,20,20,16384,0.01);
+		//(p;i;d;dt)
+    PID_ControllerInit(&SPCHIASSISA,20,20,16384,0.01);	//20,20,16384,0.01 -> A,B,C,D
     PID_ControllerInit(&SPCHIASSISB,20,20,16384,0.01);
     PID_ControllerInit(&SPCHIASSISC,20,20,16384,0.01);
     PID_ControllerInit(&SPCHIASSISD,20,20,16384,0.01);
+	
     PID_ControllerInit(&SPFOLLOW_SPEED,20,20,1500,0.01);
     PID_SetGains(&SPFOLLOW, 0.29,0.3,0.004);// 0.28,0.3,0.8
     PID_SetGains(&SPFOLLOW_SPEED,3,0.5,0.1);
     CM_Normal_PID();
+}
+//为了过20s撞墙检录（p偏小）
+void CM_Normal_PID1(void)
+{
+    PID_SetGains(&SPCHIASSISA,cm_normal_p1,cm_normal_i,cm_normal_d);
+    PID_SetGains(&SPCHIASSISB,cm_normal_p1,cm_normal_i,cm_normal_d);
+    PID_SetGains(&SPCHIASSISC,cm_normal_p1,cm_normal_i,cm_normal_d);
+    PID_SetGains(&SPCHIASSISD,cm_normal_p1,cm_normal_i,cm_normal_d);
+		PID_SetGains(&SPFOLLOW,cm_normal_follow_p,cm_normal_follow_i,cm_normal_follow_d);// 0.28,0.3,0.8
 }
 
 void CM_Normal_PID(void)
@@ -498,7 +518,7 @@ void CM_Normal_PID(void)
     PID_SetGains(&SPCHIASSISB,cm_normal_p,cm_normal_i,cm_normal_d);
     PID_SetGains(&SPCHIASSISC,cm_normal_p,cm_normal_i,cm_normal_d);
     PID_SetGains(&SPCHIASSISD,cm_normal_p,cm_normal_i,cm_normal_d);
-	PID_SetGains(&SPFOLLOW,cm_normal_follow_p,cm_normal_follow_i,cm_normal_follow_d);// 0.28,0.3,0.8
+		PID_SetGains(&SPFOLLOW,cm_normal_follow_p,cm_normal_follow_i,cm_normal_follow_d);// 0.28,0.3,0.8
 }
 
 void CM_Climb_PID(void)
@@ -507,7 +527,7 @@ void CM_Climb_PID(void)
     PID_SetGains(&SPCHIASSISB,cm_climb_p,cm_climb_i,cm_climb_d);
     PID_SetGains(&SPCHIASSISC,cm_climb_p,cm_climb_i,cm_climb_d);
     PID_SetGains(&SPCHIASSISD,cm_climb_p,cm_climb_i,cm_climb_d);
-	PID_SetGains(&SPFOLLOW,cm_climb_follow_p,cm_climb_follow_i,cm_climb_follow_d);// 0.28,0.3,0.8
+		PID_SetGains(&SPFOLLOW,cm_climb_follow_p,cm_climb_follow_i,cm_climb_follow_d);// 0.28,0.3,0.8
 }
 
 
@@ -522,24 +542,24 @@ void keyboardmove(uint16_t keyboardvalue,uint16_t xlimit,uint16_t ylimit)
         if(keymove_y>0)
             keymove_y += 0.8f*step;
         else
-            keymove_y += step*2;
+            keymove_y += step*1.6;
         break;
     case ( KEY_PRESSED_OFFSET_S):
         m = 0;
         if(keymove_y<0)
             keymove_y -= 0.8f*step;
         else
-            keymove_y -= step*2;
+            keymove_y -= step*1.6;
         break;
     default:
         m++;
         if(m>1)
         {
-            if(keymove_y>3*step) {
-                keymove_y=keymove_y-3*step;
+            if(keymove_y>1.8*step) {
+                keymove_y=keymove_y-1.8*step;
             }
-            else if(keymove_y<-3*step) {
-                keymove_y=keymove_y+3*step;
+            else if(keymove_y<-1.8*step) {
+                keymove_y=keymove_y+1.8*step;
             }
             else {
                 keymove_y = 0;
@@ -554,27 +574,28 @@ void keyboardmove(uint16_t keyboardvalue,uint16_t xlimit,uint16_t ylimit)
     case ( KEY_PRESSED_OFFSET_A):
         n = 0;
         if(keymove_x<0)
-            keymove_x -= 3*step;
+            keymove_x -= 0.8*step;//系数为3
         else
-            keymove_x -= 3*step;
+            keymove_x -= 0.8*step;
         break;
     case ( KEY_PRESSED_OFFSET_D):
         n = 0;
         if(keymove_x>0)    //正在向右
-            keymove_x += 3*step;           //加步长
+            keymove_x += 0.8*step;           //加步长
         else
-            keymove_x += 3*step;
+            keymove_x += 0.8*step;
         break;
 
     default:
-        n++;
-        if(n>1)
-        {
-            if(keymove_x>3*step) {
-                keymove_x=keymove_x-3*step;
+    n++;
+
+    if(n>1)
+    {
+            if(keymove_x>1.2*step) {
+                keymove_x=keymove_x-1.2*step;
             }
-            else if(keymove_x<-3*step) {
-                keymove_x=keymove_x+3*step;
+            else if(keymove_x<-1.2*step) {
+                keymove_x=keymove_x+1.2*step;
             }
             else {
                 keymove_x = 0;

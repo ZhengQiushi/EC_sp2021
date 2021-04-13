@@ -4,7 +4,7 @@
 #include "stm32f4xx.h"
 
 #define AUTO_FRAME_HEAD 0xf1
-#define AUTO_FRAME_LENGTH 15
+#define AUTO_FRAME_LENGTH 19//15
 
 //typedef __packed struct _frame			//视觉发来的数据框架	
 //{
@@ -35,6 +35,7 @@ typedef struct _frame
 	u16 timestamp;
 	float yaw;	
 	float pitch;
+	float speed;
 	u8 extra[2]; //additional imformation	
 	u8 crc8check;
 	u8 end;

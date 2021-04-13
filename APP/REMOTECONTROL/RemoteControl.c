@@ -25,6 +25,8 @@ int bigbuff_leftright = 0;
 
 int firstINAIMING = 0;
 int temp=0;
+extern int send_time_counter;
+extern int entering_auto_aim;
 /*-------------  Ò£¿ØÆ÷Ñ­»·  -------------*/
 void RemoteControlLoop(void)
 {
@@ -58,7 +60,13 @@ void RemoteStateFSM(void)
         }
         if(remoteState == NORMAL_REMOTE_STATE)
         {
-
+//					 sendtoComputer(0,1,0,1);
+			 if(send_time_counter%5==0)
+			 {
+				 sendtoComputer(0,1,0,entering_auto_aim);
+				 if(entering_auto_aim)
+					 entering_auto_aim=0;
+			 }
 //				auto_aim_flag = 0;
 //
 //			if((RC_Ex_Ctl.key.v & KEY_PRESSED_OFFSET_Q ) == KEY_PRESSED_OFFSET_Q)
@@ -81,7 +89,7 @@ void RemoteStateFSM(void)
         }
         if(remoteState == KEY_REMOTE_STATE)
         {
-					  //sendtoComputer(0,1,0);
+
             //ÇÐ»»×ÔÃéÄ£Ê½
             if((RC_Ex_Ctl.key.v & KEY_PRESSED_OFFSET_C ) == KEY_PRESSED_OFFSET_C)//||(RC_Ex_Ctl.key.v & KEY_PRESSED_OFFSET_Z ) == KEY_PRESSED_OFFSET_Z 
             //if(1)
